@@ -10,7 +10,7 @@ module.exports = {
   pathPrefix: '/react-ru/',
   siteMetadata: {
     title: 'React: JavaScript-библиотека для создания пользовательских интерфейсов',
-    siteUrl: 'https://javascript-russia.github.io/',
+    siteUrl: 'https://ru.react.js.org/',
     rssFeedTitle: 'React',
     rssFeedDescription: 'JavaScript-библиотека для создания пользовательских интерфейсов',
   },
