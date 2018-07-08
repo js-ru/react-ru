@@ -7,9 +7,10 @@
 'use strict';
 
 module.exports = {
+  pathPrefix: '/react-ru/',
   siteMetadata: {
     title: 'React: A JavaScript library for building user interfaces',
-    siteUrl: 'https://reactjs.org',
+    siteUrl: 'https://javascript-russia.github.io/',
     rssFeedTitle: 'React',
     rssFeedDescription: 'A JavaScript library for building user interfaces',
   },
