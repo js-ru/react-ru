@@ -1,41 +1,41 @@
-- title: Installation
+- title: Установка
   items:
     - id: getting-started
-      title: Getting Started
+      title: Начало работы
     - id: add-react-to-a-website
-      title: Add React to a Website
+      title: Добавление React на сайт
     - id: create-a-new-react-app
       title: Create a New React App
     - id: cdn-links
-      title: CDN Links
-- title: Main Concepts
+      title: Ссыылки с CDN
+- title: Основные концепции
   isOrdered: true
   items:
     - id: hello-world
       title: Hello World
     - id: introducing-jsx
-      title: Introducing JSX
+      title: Введение в JSX
     - id: rendering-elements
-      title: Rendering Elements
+      title: Отрисовка элементов
     - id: components-and-props
-      title: Components and Props
+      title: Компоненты и свойства
     - id: state-and-lifecycle
-      title: State and Lifecycle
+      title: Свойства и жизненный цикл
     - id: handling-events
-      title: Handling Events
+      title: Обработка событий
     - id: conditional-rendering
-      title: Conditional Rendering
+      title: Условная отрисовка
     - id: lists-and-keys
-      title: Lists and Keys
+      title: Списки и ключи
     - id: forms
-      title: Forms
+      title: Формы
     - id: lifting-state-up
-      title: Lifting State Up
+      title: Поднятие состояние вверх
     - id: composition-vs-inheritance
-      title: Composition vs Inheritance
+      title: Композиция в сравнении с наследованием
     - id: thinking-in-react
       title: Thinking In React
-- title: Advanced Guides
+- title: Продвинутые руководства
   items:
     - id: accessibility
       title: Accessibility
@@ -79,7 +79,7 @@
       title: Uncontrolled Components
     - id: web-components
       title: Web Components
-- title: API Reference
+- title: Справочник API
   items:
     - id: react-api
       title: React
@@ -104,7 +104,7 @@
       title: JS Environment Requirements
     - id: glossary
       title: Glossary
-- title: Contributing
+- title: Участие в проекте
   items:
   - id: how-to-contribute
     title: How to Contribute

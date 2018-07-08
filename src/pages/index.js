@@ -74,7 +74,7 @@ class Home extends Component {
     return (
       <div css={{width: '100%'}}>
         <TitleAndMetaTags
-          title="React - A JavaScript library for building user interfaces"
+          title="React — JavaScript-библиотека для создания пользовательских интерфейсов"
           ogUrl={createOgUrl('index.html')}
         />
         <header
@@ -156,7 +156,7 @@ class Home extends Component {
                       fontSize: 30,
                     },
                   }}>
-                  A JavaScript library for building user interfaces
+                  JavaScript-библиотека для создания пользовательских интерфейсов
                 </p>
                 <Flex
                   valign="center"
@@ -169,12 +169,12 @@ class Home extends Component {
                   }}>
                   <CtaItem>
                     <ButtonLink to="/docs/getting-started.html" type="primary">
-                      Get Started
+                      Начать изучение
                     </ButtonLink>
                   </CtaItem>
                   <CtaItem>
                     <ButtonLink to="/tutorial/tutorial.html" type="secondary">
-                      Take the Tutorial
+                      Перейти к введению
                     </ButtonLink>
                   </CtaItem>
                 </Flex>
@@ -312,12 +312,12 @@ class Home extends Component {
             <Flex valign="center">
               <CtaItem>
                 <ButtonLink to="/docs/getting-started.html" type="primary">
-                  Get Started
+                  Начать изучение
                 </ButtonLink>
               </CtaItem>
               <CtaItem>
                 <ButtonLink to="/tutorial/tutorial.html" type="secondary">
-                  Take the Tutorial
+                  Перейти к введению
                 </ButtonLink>
               </CtaItem>
             </Flex>
@@ -339,7 +339,7 @@ Home.propTypes = {
 
 function renderExamplePlaceholder(containerId) {
   ReactDOM.render(
-    <h4>Loading code example...</h4>,
+    <h4>Загрузка примеров кода...</h4>,
     document.getElementById(containerId),
   );
 }
