@@ -1,0 +1,2 @@
+webpackJsonp([93181728692828],{1010:function(e,o){e.exports={pathContext:{action:"https://codepen.io/pen/define",payload:'{"editors":"0010","html":"<div id=\\"root\\"></div>","js":"const WrappedComponent = React.forwardRef((props, ref) => {\\n  return <LogProps {...props} forwardedRef={ref} />;\\n});\\n","js_external":"//unpkg.com/react/umd/react.development.js;//unpkg.com/react-dom/umd/react-dom.development.js","js_pre_processor":"babel","layout":"left"}'}}}});
+//# sourceMappingURL=path---redirect-to-codepen-forwarding-refs-wrapped-component-00ca01f81019fb278527.js.map
