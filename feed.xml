@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[React]]></title><description><![CDATA[JavaScript-библиотека для создания пользовательских интерфейсов]]></description><link>https://ru.react.js.org/</link><generator>RSS for Node</generator><lastBuildDate>Sun, 08 Jul 2018 17:43:15 GMT</lastBuildDate><item><title><![CDATA[You Probably Don't Need Derived State]]></title><description><![CDATA[<p>React 16.4 included a <a href="/blog/2018/05/23/react-v-16-4.html#bugfix-for-getderivedstatefromprops">bugfix for getDerivedStateFromProps</a> which caused some existing bugs in React components to reproduce more consistently. If this release exposed a case where your application was using an anti-pattern and didn’t work properly after the fix, we’re sorry for the churn. In this post, we will explain some common anti-patterns with derived state and our preferred alternatives.</p>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[React]]></title><description><![CDATA[JavaScript-библиотека для создания пользовательских интерфейсов]]></description><link>https://ru.react.js.org/</link><generator>RSS for Node</generator><lastBuildDate>Mon, 09 Jul 2018 13:58:48 GMT</lastBuildDate><item><title><![CDATA[You Probably Don't Need Derived State]]></title><description><![CDATA[<p>React 16.4 included a <a href="/blog/2018/05/23/react-v-16-4.html#bugfix-for-getderivedstatefromprops">bugfix for getDerivedStateFromProps</a> which caused some existing bugs in React components to reproduce more consistently. If this release exposed a case where your application was using an anti-pattern and didn’t work properly after the fix, we’re sorry for the churn. In this post, we will explain some common anti-patterns with derived state and our preferred alternatives.</p>
 <p>For a long time, the lifecycle <code class="gatsby-code-text">componentWillReceiveProps</code> was the only way to update state in response to a change in props without an additional render. In version 16.3, <a href="/blog/2018/03/29/react-v-16-3.html#component-lifecycle-changes">we introduced a replacement lifecycle, <code class="gatsby-code-text">getDerivedStateFromProps</code></a> to solve the same use cases in a safer way. At the same time, we’ve realized that people have many misconceptions about how to use both methods, and we’ve found anti-patterns that result in subtle and confusing bugs. The <code class="gatsby-code-text">getDerivedStateFromProps</code> bugfix in 16.4 <a href="https://github.com/facebook/react/issues/12898">makes derived state more predictable</a>, so the results of misusing it are easier to notice.</p>
 <blockquote>
 <p>Note</p>
@@ -1246,13 +1246,13 @@ yarn add react-lifecycles-compat
 <p>If the development bundle executes, <a href="https://github.com/facebook/react/blob/d906de7f602df810c38aa622c83023228b047db6/packages/react-dom/src/client/ReactDOM.js#L1333-L1335">React DOM reports this to React DevTools</a>:</p>
 <br>
 
-  <a class="gatsby-resp-image-link" href="/react-ru/static/devtools-dev-e434ce2f7e64f63e597edf03f4465694-1e9b4.png" style="display: block" target="_blank" rel="noopener">
+  <a class="gatsby-resp-image-link" href="/static/devtools-dev-e434ce2f7e64f63e597edf03f4465694-1e9b4.png" style="display: block" target="_blank" rel="noopener">
   
   <span class="gatsby-resp-image-wrapper" style="position: relative; display: block; ; max-width: 600px; margin-left: auto; margin-right: auto;">
     <span class="gatsby-resp-image-background-image" style="padding-bottom: 33.33333333333333%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAIAAACHqfpvAAAACXBIWXMAABYlAAAWJQFJUiTwAAAA7ElEQVQY05WQDWuDMBCG8///VQvCSIzxI9n8qEtiurmaqFFHwc3pUsZKYYyxh+N477gX7g68/x+tdSs593bgz9GPHyzLcn6dzoMFNGEQwiShaZr6GDNGaXIBQkQIYYwFJKRJjHEgxUHXqTOv6+rytm0gzwtVVZzzsiyLIldKHY9PnD9KIZ0uioMQQlXKDWRZJqvKNZ3W2lzMb78wz/OtuJZX3EXA8zy3XoD9OKToLnSBYRSFaUTu4/CBYLLf77DvI4QR8t0tUqjtG9Ca1lo7jmNnBtMMTW2bF3uqe6dPz33X2S+Mafu+n6bp9nOfEzOCGSCp8RoAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;">
-      <img class="gatsby-resp-image-image" style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;" alt="React DevTools on a website with development version of React" title="" src="/react-ru/static/devtools-dev-e434ce2f7e64f63e597edf03f4465694-1e9b4.png" srcset="/react-ru/static/devtools-dev-e434ce2f7e64f63e597edf03f4465694-1cd08.png 210w,
-/react-ru/static/devtools-dev-e434ce2f7e64f63e597edf03f4465694-9b07a.png 420w,
-/react-ru/static/devtools-dev-e434ce2f7e64f63e597edf03f4465694-1e9b4.png 600w" sizes="(max-width: 600px) 100vw, 600px">
+      <img class="gatsby-resp-image-image" style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;" alt="React DevTools on a website with development version of React" title="" src="/static/devtools-dev-e434ce2f7e64f63e597edf03f4465694-1e9b4.png" srcset="/static/devtools-dev-e434ce2f7e64f63e597edf03f4465694-1cd08.png 210w,
+/static/devtools-dev-e434ce2f7e64f63e597edf03f4465694-9b07a.png 420w,
+/static/devtools-dev-e434ce2f7e64f63e597edf03f4465694-1e9b4.png 600w" sizes="(max-width: 600px) 100vw, 600px">
     </span>
   </span>
   
@@ -1368,7 +1368,7 @@ type Check<span class="token operator">&lt;</span>_X<span class="token punctuati
 <p>
   <a
     class="gatsby-resp-image-link"
-    href="/react-ru/static/release-script-build-overview-adca79c3a0e003b317fe62e68ce9d4a0-a0a5f.png"
+    href="/static/release-script-build-overview-adca79c3a0e003b317fe62e68ce9d4a0-a0a5f.png"
     style="display: block"
     target="_blank"
     rel="noopener"
@@ -1387,10 +1387,10 @@ type Check<span class="token operator">&lt;</span>_X<span class="token punctuati
         style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;"
         alt="Release Script overview"
         title=""
-        src="/react-ru/static/release-script-build-overview-adca79c3a0e003b317fe62e68ce9d4a0-a0a5f.png"
-        srcset="/react-ru/static/release-script-build-overview-adca79c3a0e003b317fe62e68ce9d4a0-d0a04.png 210w,
-/react-ru/static/release-script-build-overview-adca79c3a0e003b317fe62e68ce9d4a0-c8d6c.png 420w,
-/react-ru/static/release-script-build-overview-adca79c3a0e003b317fe62e68ce9d4a0-a0a5f.png 822w"
+        src="/static/release-script-build-overview-adca79c3a0e003b317fe62e68ce9d4a0-a0a5f.png"
+        srcset="/static/release-script-build-overview-adca79c3a0e003b317fe62e68ce9d4a0-d0a04.png 210w,
+/static/release-script-build-overview-adca79c3a0e003b317fe62e68ce9d4a0-c8d6c.png 420w,
+/static/release-script-build-overview-adca79c3a0e003b317fe62e68ce9d4a0-a0a5f.png 822w"
         sizes="(max-width: 822px) 100vw, 822px"
       />
     </span>
@@ -1402,7 +1402,7 @@ type Check<span class="token operator">&lt;</span>_X<span class="token punctuati
 <p>
   <a
     class="gatsby-resp-image-link"
-    href="/react-ru/static/release-script-build-confirmation-17f44f353d82a22f6a18707956ad065f-d15b8.png"
+    href="/static/release-script-build-confirmation-17f44f353d82a22f6a18707956ad065f-d15b8.png"
     style="display: block"
     target="_blank"
     rel="noopener"
@@ -1421,13 +1421,13 @@ type Check<span class="token operator">&lt;</span>_X<span class="token punctuati
         style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;"
         alt="Release Script build confirmation screen"
         title=""
-        src="/react-ru/static/release-script-build-confirmation-17f44f353d82a22f6a18707956ad065f-acf85.png"
-        srcset="/react-ru/static/release-script-build-confirmation-17f44f353d82a22f6a18707956ad065f-c1418.png 210w,
-/react-ru/static/release-script-build-confirmation-17f44f353d82a22f6a18707956ad065f-5d5d8.png 420w,
-/react-ru/static/release-script-build-confirmation-17f44f353d82a22f6a18707956ad065f-acf85.png 840w,
-/react-ru/static/release-script-build-confirmation-17f44f353d82a22f6a18707956ad065f-de0cd.png 1260w,
-/react-ru/static/release-script-build-confirmation-17f44f353d82a22f6a18707956ad065f-bd6c2.png 1680w,
-/react-ru/static/release-script-build-confirmation-17f44f353d82a22f6a18707956ad065f-d15b8.png 1765w"
+        src="/static/release-script-build-confirmation-17f44f353d82a22f6a18707956ad065f-acf85.png"
+        srcset="/static/release-script-build-confirmation-17f44f353d82a22f6a18707956ad065f-c1418.png 210w,
+/static/release-script-build-confirmation-17f44f353d82a22f6a18707956ad065f-5d5d8.png 420w,
+/static/release-script-build-confirmation-17f44f353d82a22f6a18707956ad065f-acf85.png 840w,
+/static/release-script-build-confirmation-17f44f353d82a22f6a18707956ad065f-de0cd.png 1260w,
+/static/release-script-build-confirmation-17f44f353d82a22f6a18707956ad065f-bd6c2.png 1680w,
+/static/release-script-build-confirmation-17f44f353d82a22f6a18707956ad065f-d15b8.png 1765w"
         sizes="(max-width: 840px) 100vw, 840px"
       />
     </span>
@@ -1439,7 +1439,7 @@ type Check<span class="token operator">&lt;</span>_X<span class="token punctuati
 <p>
   <a
     class="gatsby-resp-image-link"
-    href="/react-ru/static/release-script-publish-confirmation-a3846d4b3e50d29415846b58612310f2-bd35c.png"
+    href="/static/release-script-publish-confirmation-a3846d4b3e50d29415846b58612310f2-bd35c.png"
     style="display: block"
     target="_blank"
     rel="noopener"
@@ -1458,11 +1458,11 @@ type Check<span class="token operator">&lt;</span>_X<span class="token punctuati
         style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;"
         alt="Release Script publish confirmation screen"
         title=""
-        src="/react-ru/static/release-script-publish-confirmation-a3846d4b3e50d29415846b58612310f2-acf85.png"
-        srcset="/react-ru/static/release-script-publish-confirmation-a3846d4b3e50d29415846b58612310f2-c1418.png 210w,
-/react-ru/static/release-script-publish-confirmation-a3846d4b3e50d29415846b58612310f2-5d5d8.png 420w,
-/react-ru/static/release-script-publish-confirmation-a3846d4b3e50d29415846b58612310f2-acf85.png 840w,
-/react-ru/static/release-script-publish-confirmation-a3846d4b3e50d29415846b58612310f2-bd35c.png 1178w"
+        src="/static/release-script-publish-confirmation-a3846d4b3e50d29415846b58612310f2-acf85.png"
+        srcset="/static/release-script-publish-confirmation-a3846d4b3e50d29415846b58612310f2-c1418.png 210w,
+/static/release-script-publish-confirmation-a3846d4b3e50d29415846b58612310f2-5d5d8.png 420w,
+/static/release-script-publish-confirmation-a3846d4b3e50d29415846b58612310f2-acf85.png 840w,
+/static/release-script-publish-confirmation-a3846d4b3e50d29415846b58612310f2-bd35c.png 1178w"
         sizes="(max-width: 840px) 100vw, 840px"
       />
     </span>
