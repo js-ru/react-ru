@@ -7,7 +7,7 @@
 'use strict';
 
 module.exports = {
-  pathPrefix: '/react-ru/',
+  //pathPrefix: '/react-ru/',
   siteMetadata: {
     title: 'React: JavaScript-библиотека для создания пользовательских интерфейсов',
     siteUrl: 'https://ru.react.js.org/',
