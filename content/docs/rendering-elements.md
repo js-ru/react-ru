@@ -1,15 +1,15 @@
 ---
 id: rendering-elements
-title: Rendering Elements
+title: Отрисовка элементов
 permalink: docs/rendering-elements.html
 redirect_from: "docs/displaying-data.html"
 prev: introducing-jsx.html
 next: components-and-props.html
 ---
 
-Elements are the smallest building blocks of React apps.
+Элементы — это самые маленькие строительные блоки приложений React.
 
-An element describes what you want to see on the screen:
+Элемент описывает, что вы хотите видеть на экране:
 
 ```js
 const element = <h1>Hello, world</h1>;
@@ -17,58 +17,60 @@ const element = <h1>Hello, world</h1>;
 
 Unlike browser DOM elements, React elements are plain objects, and are cheap to create. React DOM takes care of updating the DOM to match the React elements.
 
->**Note:**
+В отличие от DOM-элементов браузера, элементы React — обычные объекты, лёгкие для создания. React DOM берёт заботу по обновлению DOM на себя для соответствия элементам React.
+
+> **Примечание:**
 >
->One might confuse elements with a more widely known concept of "components". We will introduce components in the [next section](/docs/components-and-props.html). Elements are what components are "made of", and we encourage you to read this section before jumping ahead.
+> Может сбить с толку элементы с более широко известной концепцией «компонентов». Мы представим компоненты в следующем разделе (/docs/components-and-props.html). Элементы — это то, что из чего компоненты «сделаны», и мы рекомендуем вам прочитать этот раздел, прежде чем идти вперёд.
 
-## Rendering an Element into the DOM
+## Отрисовка элемента в DOM
 
-Let's say there is a `<div>` somewhere in your HTML file:
+Предположим, что в вашем файле HTML есть `<div>`:
 
 ```html
 <div id="root"></div>
 ```
 
-We call this a "root" DOM node because everything inside it will be managed by React DOM.
+Мы называем это «корневым» узлом DOM, потому что всё внутри него будет управляться DOM React.
 
-Applications built with just React usually have a single root DOM node. If you are integrating React into an existing app, you may have as many isolated root DOM nodes as you like.
+У приложений, созданных только с использованием React, обычно есть только единственный корневой узел DOM. Если вы интегрируете React в существующее приложение, у вас может быть как можно больше изолированных корневых узлов DOM.
 
-To render a React element into a root DOM node, pass both to `ReactDOM.render()`:
+Чтобы отрисовать элемент React в корневом узле DOM, передайте его в `ReactDOM.render()`:
 
 `embed:rendering-elements/render-an-element.js`
 
 [](codepen://rendering-elements/render-an-element)
 
-It displays "Hello, world" on the page.
+На странице отобразится «Привет, мир».
 
-## Updating the Rendered Element
+## Обновление отрисованного элемента
 
-React elements are [immutable](https://en.wikipedia.org/wiki/Immutable_object). Once you create an element, you can't change its children or attributes. An element is like a single frame in a movie: it represents the UI at a certain point in time.
+React-элементы — [неизменяемы](https://ru.wikipedia.org/wiki/%D0%9D%D0%B5%D0%B8%D0%B7%D0%BC%D0%B5%D0%BD%D1%8F%D0%B5%D0%BC%D1%8B%D0%B9_%D0%BE%D0%B1%D1%8A%D0%B5%D0%BA%D1%82). Создав однажды элемент, вы не сможете изменить его дочерние элементы или атрибуты. Элемент похож на один кадр в фильме: он представляет собой пользовательский интерфейс в определённый момент времени.
 
-With our knowledge so far, the only way to update the UI is to create a new element, and pass it to `ReactDOM.render()`.
+Насколько известно из предыдущих разделов, единственный способ обновить интерфейс — создать новый элемент и передать его в `ReactDOM.render()`.
 
-Consider this ticking clock example:
+Рассмотрим этот пример тикающих часов:
 
 `embed:rendering-elements/update-rendered-element.js`
 
 [](codepen://rendering-elements/update-rendered-element)
 
-It calls `ReactDOM.render()` every second from a [`setInterval()`](https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setInterval) callback.
+Он вызывает каждую секунду `ReactDOM.render()` из колбэка [`setInterval()`](https://developer.mozilla.org/ru/docs/Web/API/WindowTimers/setInterval).
 
->**Note:**
+> **Примечание:**
 >
->In practice, most React apps only call `ReactDOM.render()` once. In the next sections we will learn how such code gets encapsulated into [stateful components](/docs/state-and-lifecycle.html).
+> На практике большинство приложений React только один раз вызывают `ReactDOM.render()`. В следующих разделах мы узнаем, как такой код инкапсулируется в [компоненты с состоянием] (/docs/state-and-lifecycle.html).
 >
->We recommend that you don't skip topics because they build on each other.
+> Мы рекомендуем вам не пропускать эти темы, потому что они опираются друг на друга.
 
-## React Only Updates What's Necessary
+## React обновляет только то, что необходимо
 
-React DOM compares the element and its children to the previous one, and only applies the DOM updates necessary to bring the DOM to the desired state.
+DOM React сравнивает элемент и его дочерние элементы с предыдущими и применяет только обновления DOM, необходимые для преобразования DOM в желаемое состояние.
 
-You can verify by inspecting the [last example](codepen://rendering-elements/update-rendered-element) with the browser tools:
+Вы можете убедиться в том, проверив [последний пример](codepen://render-elements/update-rendered-element) с помощью инструментов браузера:
 
-![DOM inspector showing granular updates](../images/docs/granular-dom-updates.gif)
+![DOM-инспектор, показывающий подробные обновления](../images/docs/granular-dom-updates.gif)
 
-Even though we create an element describing the whole UI tree on every tick, only the text node whose contents has changed gets updated by React DOM.
+Несмотря на то, что мы создаём элемент, описывающий всё дерево пользовательского интерфейса на каждом тике, только текстовый узел, содержимое которого изменилось, обновляется в DOM React.
 
-In our experience, thinking about how the UI should look at any given moment rather than how to change it over time eliminates a whole class of bugs.
+По нашему опыту, размышление о том, как пользовательский интерфейс должен выглядеть в любой данный момент, а не то, как его менять со временем, устраняет целый класс багов.
