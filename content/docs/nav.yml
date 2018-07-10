@@ -7,7 +7,7 @@
     - id: create-a-new-react-app
       title: Create a New React App
     - id: cdn-links
-      title: Ссыылки с CDN
+      title: Ссылки с CDN
 - title: Основные концепции
   isOrdered: true
   items:
