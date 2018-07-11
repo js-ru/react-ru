@@ -1,40 +1,40 @@
 ---
 id: introducing-jsx
-title: Introducing JSX
+title: Введение в JSX
 permalink: docs/introducing-jsx.html
 prev: hello-world.html
 next: rendering-elements.html
 ---
 
-Consider this variable declaration:
+Рассмотрим это объявление переменной:
 
 ```js
-const element = <h1>Hello, world!</h1>;
+const element = <h1>Привет, мир!</h1>;
 ```
 
-This funny tag syntax is neither a string nor HTML.
+Синтаксис этого странного тега не является ни строкой, ни HTML.
 
-It is called JSX, and it is a syntax extension to JavaScript. We recommend using it with React to describe what the UI should look like. JSX may remind you of a template language, but it comes with the full power of JavaScript.
+Он называется JSX, и это расширение синтаксиса JavaScript. Мы рекомендуем использовать его с React для описания того, как должен выглядеть пользовательский интерфейс. JSX может напомнить вам о языке шаблонов, но со всей полной мощью JavaScript.
 
-JSX produces React "elements". We will explore rendering them to the DOM in the [next section](/docs/rendering-elements.html). Below, you can find the basics of JSX necessary to get you started.
+JSX создаёт «элементы» React. Мы рассмотрим их отрисовку в DOM в [следующем разделе](/docs/rendering-elements.html). Ниже вы можете найти основы JSX, необходимые для начала работы.
 
-### Why JSX?
+### Почему JSX?
 
-React embraces the fact that rendering logic is inherently coupled with other UI logic: how events are handled, how the state changes over time, and how the data is prepared for display.
+React принимает тот факт, что логика отрисовки по сути связана с другой логикой пользовательского интерфейса: как обрабатываются события, как изменяется состояние со временем и как данные подготовлены для отображения.
 
-Instead of artificially separating *technologies* by putting markup and logic in separate files, React [separates *concerns*](https://en.wikipedia.org/wiki/Separation_of_concerns) with loosely coupled units called "components" that contain both. We will come back to components in a [further section](/docs/components-and-props.html), but if you're not yet comfortable putting markup in JS, [this talk](https://www.youtube.com/watch?v=x7cQ3mrcKaY) might convince you otherwise.
+Вместо искусственного разделения *технологий*, помещая разметку и логику в отдельные файлы, React [разделяет *ответственности*] (https://ru.wikipedia.org/wiki/%D0%A0%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5_%D0%BE%D1%82%D0%B2%D0%B5%D1%82%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D0%B8) с слабо связанными модулями, называемыми «компонентами», которые содержат вместе разметку и логику. Мы вернёмся к компонентам в [следующем разделе](/docs/components-and-props.html), но если вы ещё не очень хорошо умеет размещать разметку в JS, [этот доклад](https://www.youtube.com/watch?v=x7cQ3mrcKaY) может убедить вас в другом.
 
-React [doesn't require](/docs/react-without-jsx.html) using JSX, but most people find it helpful as a visual aid when working with UI inside the JavaScript code. It also allows React to show more useful error and warning messages.
+React [не требует](/docs/response-without-jsx.html) использование JSX, но большинство людей находят его полезным в качестве визуальной демонстрации при работе с пользовательским интерфейсом внутри кода JavaScript. Он также позволяет React показывать более полезные сообщения об ошибках и предупреждения.
 
-With that out of the way, let's get started!
+Теперь, когда с этим разобрались, давайте начнём!
 
-### Embedding Expressions in JSX
+### Встраивание выражений в JSX
 
-In the example below, we declare a variable called `name` and then use it inside JSX by wrapping it in curly braces:
+В приведённом ниже примере мы объявляем переменную с именем `name`, а затем используем ее внутри JSX, обернув ее в фигурные скобки:
 
 ```js{1,2}
 const name = 'Josh Perez';
-const element = <h1>Hello, {name}</h1>;
+const element = <h1>Привет, {name}</h1>;
 
 ReactDOM.render(
   element,
@@ -42,9 +42,9 @@ ReactDOM.render(
 );
 ```
 
-You can put any valid [JavaScript expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Expressions) inside the curly braces in JSX. For example, `2 + 2`, `user.firstName`, or `formatName(user)` are all valid JavaScript expressions.
+В фигурных скобках JSX вы можете поместить любое корректное [выражение JavaScript](https://developer.mozilla.org/ru/docs/Web/JavaScript/Guide/Expressions_and_Operators#Expressions). Например, `2 + 2`, `user.firstName`, или `formatName(user)` — всё это допустимые выражения в JavaScript.
 
-In the example below, we embed the result of calling a JavaScript function, `formatName(user)`, into an `<h1>` element.
+В приведённом ниже примере мы вставляем результат вызова функции JavaScript, `formatName(user)`, в элемент `<h1>`.
 
 ```js{12}
 function formatName(user) {
@@ -70,86 +70,88 @@ ReactDOM.render(
 
 [](codepen://introducing-jsx)
 
-We split JSX over multiple lines for readability. While it isn't required, when doing this, we also recommend wrapping it in parentheses to avoid the pitfalls of [automatic semicolon insertion](http://stackoverflow.com/q/2846283).
+Мы разделяем JSX на несколько строк для удобства чтения. Хотя это не требуется, при этом мы также рекомендуем обёртывать его в круглых скобках, чтобы избежать ошибок, связанных с [автоматической вставкой точки с запятой](http://stackoverflow.com/q/2846283).
 
-### JSX is an Expression Too
+### JSX — это выражение тоже
 
-After compilation, JSX expressions become regular JavaScript function calls and evaluate to JavaScript objects.
+После компиляции выражения JSX становятся обычными вызовами функций JavaScript и вычисляются в объекты JavaScript.
 
-This means that you can use JSX inside of `if` statements and `for` loops, assign it to variables, accept it as arguments, and return it from functions:
+Это означает, что вы можете использовать JSX внутри операторов `if` и` for`, присваивать его переменным, принимать его в качесиве аргументов и возвращать из функций:
 
 ```js{3,5}
 function getGreeting(user) {
   if (user) {
-    return <h1>Hello, {formatName(user)}!</h1>;
+    return <h1>Привет, {formatName(user)}!</h1>;
   }
-  return <h1>Hello, Stranger.</h1>;
+  return <h1>Привет, незнакомец.</h1>;
 }
 ```
 
-### Specifying Attributes with JSX
+### Установка атрибутов с помощью JSX
 
-You may use quotes to specify string literals as attributes:
+Вы можете использовать кавычки для указания строковых литералов в качестве атрибутов:
 
 ```js
 const element = <div tabIndex="0"></div>;
 ```
 
-You may also use curly braces to embed a JavaScript expression in an attribute:
+Вы также можете использовать фигурные скобки для вставки JavaScript-выражения в атрибут:
 
 ```js
 const element = <img src={user.avatarUrl}></img>;
 ```
 
-Don't put quotes around curly braces when embedding a JavaScript expression in an attribute. You should either use quotes (for string values) or curly braces (for expressions), but not both in the same attribute.
+Не используйте кавычки вокруг фигурных скобок при вставке выражения JavaScript в атрибут. Нужно использовать либо кавычки (для строковых значений), либо фигурные скобки (для выражений), но не оба в одном и том же атрибуте.
 
->**Warning:**
+> ** Внимание: **
 >
->Since JSX is closer to JavaScript than to HTML, React DOM uses `camelCase` property naming convention instead of HTML attribute names.
+> Поскольку JSX ближе к JavaScript, чем к HTML, React DOM использует соглашение об именах свойств `camelCase` вместо имён атрибутов HTML.
 >
->For example, `class` becomes [`className`](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) in JSX, and `tabindex` becomes [`tabIndex`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/tabIndex).
+> Например, `class` становится [`className`](https://developer.mozilla.org/ru/docs/Web/API/Element/className) в JSX, а `tabindex` становится [`tabIndex`] (https://developer.mozilla.org/ru/docs/Web/API/HTMLElement/tabIndex).
 
-### Specifying Children with JSX
+### Установка детей с помощью JSX
 
-If a tag is empty, you may close it immediately with `/>`, like XML:
+Если тег пуст, вы можете немедленно его закрыть с помощью `/>`, точно так же, как в XML:
 
 ```js
 const element = <img src={user.avatarUrl} />;
 ```
 
-JSX tags may contain children:
+Теги JSX могут содержать дочерние элементы:
 
 ```js
 const element = (
   <div>
-    <h1>Hello!</h1>
-    <h2>Good to see you here.</h2>
+    <h1>Привет!</h1>
+    <h2>Рад тебя видеть.</h2>
   </div>
 );
 ```
 
-### JSX Prevents Injection Attacks
+### JSX предотвращает атаки-инъекции
 
-It is safe to embed user input in JSX:
+Безопасно встраивать пользовательские данные в JSX:
 
 ```js
 const title = response.potentiallyMaliciousInput;
-// This is safe:
+// Это безопасно:
 const element = <h1>{title}</h1>;
 ```
 
 By default, React DOM [escapes](http://stackoverflow.com/questions/7381974/which-characters-need-to-be-escaped-on-html) any values embedded in JSX before rendering them. Thus it ensures that you can never inject anything that's not explicitly written in your application. Everything is converted to a string before being rendered. This helps prevent [XSS (cross-site-scripting)](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks.
 
-### JSX Represents Objects
+По умолчанию DOM React [экранирует](http://stackoverflow.com/questions/7381974/which-characters-need-to-be-escaped-on-html) любые значения, встроенные в JSX, перед их отрисовкой. Таким образом, гарантируется, что вы никогда не сможете внедрить то, чего явно нет в вашем приложении. Перед отрисовкой все преобразуется в строку. Это помогает предотвратить атаки [межсайтовый скриптинг (cross-site-scripting, XSS)](https://ru.wikipedia.org/wiki/%D0%9C%D0%B5%D0%B6%D1%81%D0%B0%D0%B9%D1%82%D0%BE%D0%B2%D1%8B%D0%B9_%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%B8%D0%BD%D0%B3).
 
-Babel compiles JSX down to `React.createElement()` calls.
+### JSX представляет из себя объекты
 
-These two examples are identical:
+Babel компилирует JSX в вызовы `React.createElement()`.
+
+Ниже два примера идентичны:
 
 ```js
 const element = (
   <h1 className="greeting">
-    Hello, world!
+    Привет, мир!
   </h1>
 );
 ```
@@ -158,27 +160,27 @@ const element = (
 const element = React.createElement(
   'h1',
   {className: 'greeting'},
-  'Hello, world!'
+  'Привет, мир!'
 );
 ```
 
-`React.createElement()` performs a few checks to help you write bug-free code but essentially it creates an object like this:
+`React.createElement ()` выполняет несколько проверок для помощи вам написать код без ошибок, но по сути он создает такой объект:
 
 ```js
-// Note: this structure is simplified
+// Примечание: эта структура упрощена
 const element = {
   type: 'h1',
   props: {
     className: 'greeting',
-    children: 'Hello, world!'
+    children: 'Привет, мир!'
   }
 };
 ```
 
-These objects are called "React elements". You can think of them as descriptions of what you want to see on the screen. React reads these objects and uses them to construct the DOM and keep it up to date.
+Эти объекты называются элементами «React-элементами». Можно думать о них как о том, что вы хотите видеть на экране. React считывает эти объекты и использует их для построения DOM и его обновления.
 
-We will explore rendering React elements to the DOM in the next section.
+Мы рассмотрим отрисовку элементов React в DOM в следующем разделе.
 
->**Tip:**
+> ** Совет: **
 >
->We recommend using the ["Babel" language definition](http://babeljs.io/docs/editors) for your editor of choice so that both ES6 and JSX code is properly highlighted. This website uses the [Oceanic Next](https://labs.voronianski.com/oceanic-next-color-scheme/) color scheme which is compatible with it.
+> Мы рекомендуем использовать [определение языка «Babel»](http://babeljs.io/docs/editors) в вашем редакторе, чтобы как код ES6, так и JSX были правильно подсвечены. Этот сайт использует цветовую схему[Oceanic Next] (https://labs.voronianski.com/oceanic-next-color-scheme/), которая совместима с этим определением.
