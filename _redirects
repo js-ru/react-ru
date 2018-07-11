@@ -11,7 +11,13 @@
 ## Created with gatsby-plugin-netlify
 
 /index.html  /  302
+/docs/conferences.html  /community/conferences.html  302
+/support.html  /community/support.html  302
+/docs/videos.html  /community/videos.html  302
 /blog/2014/10/14/introducting-react-elements.html  /blog/2014/10/14/introducing-react-elements.html  302
+/docs/animation-ja-JP.html  /docs/animation.html  302
+/docs/animation-ko-KR.html  /docs/animation.html  302
+/docs/animation-zh-CN.html  /docs/animation.html  302
 /docs/add-react-to-an-existing-app.html  /docs/add-react-to-a-website.html  302
 /contributing/codebase-overview.html  /docs/codebase-overview.html  302
 /docs/reusable-components.html  /docs/components-and-props.html  302
@@ -23,15 +29,10 @@
 /docs/transferring-props-zh-CN.html  /docs/components-and-props.html  302
 /tips/props-in-getInitialState-as-anti-pattern.html  /docs/components-and-props.html  302
 /tips/communicate-between-components.html  /docs/components-and-props.html  302
-/docs/multiple-components.html  /docs/composition-vs-inheritance.html  302
-/tips/false-in-jsx.html  /docs/conditional-rendering.html  302
-/docs/animation-ja-JP.html  /docs/animation.html  302
-/docs/animation-ko-KR.html  /docs/animation.html  302
-/docs/animation-zh-CN.html  /docs/animation.html  302
 /docs/add-react-to-a-new-app.html  /docs/create-a-new-react-app.html  302
 /contributing/design-principles.html  /docs/design-principles.html  302
-/tips/controlled-input-null-value.html  /docs/forms.html  302
-/docs/forms-zh-CN.html  /docs/forms.html  302
+/docs/multiple-components.html  /docs/composition-vs-inheritance.html  302
+/tips/false-in-jsx.html  /docs/conditional-rendering.html  302
 /docs/  /docs/getting-started.html  302
 /docs/index.html  /docs/getting-started.html  302
 /docs/getting-started-ko-KR.html  /docs/getting-started.html  302
@@ -47,7 +48,8 @@
 /docs/events-ko-KR.html  /docs/handling-events.html  302
 /contributing/how-to-contribute.html  /docs/how-to-contribute.html  302
 /tips/introduction.html  /docs/how-to-contribute.html  302
-/contributing/implementation-notes.html  /docs/implementation-notes.html  302
+/tips/controlled-input-null-value.html  /docs/forms.html  302
+/docs/forms-zh-CN.html  /docs/forms.html  302
 /docs/jsx-spread.html  /docs/jsx-in-depth.html  302
 /docs/jsx-gotchas.html  /docs/jsx-in-depth.html  302
 /tips/if-else-in-JSX.html  /docs/jsx-in-depth.html  302
@@ -87,17 +89,15 @@
 /tips/expose-component-functions.html  /docs/refs-and-the-dom.html  302
 /tips/children-undefined.html  /docs/refs-and-the-dom.html  302
 /docs/displaying-data.html  /docs/rendering-elements.html  302
-/docs/interactivity-and-dynamic-uis.html  /docs/state-and-lifecycle.html  302
-/docs/react-api.html#typechecking-with-proptypes  /docs/typechecking-with-proptypes.html  302
 /blog/2013/11/05/thinking-in-react.html  /docs/thinking-in-react.html  302
 /docs/thinking-in-react-zh-CN.html  /docs/thinking-in-react.html  302
+/docs/react-api.html#typechecking-with-proptypes  /docs/typechecking-with-proptypes.html  302
 /docs/webcomponents.html  /docs/web-components.html  302
+/docs/interactivity-and-dynamic-uis.html  /docs/state-and-lifecycle.html  302
+/contributing/implementation-notes.html  /docs/implementation-notes.html  302
 /docs/tutorial.html  /tutorial/tutorial.html  302
 /docs/why-react.html  /tutorial/tutorial.html  302
 /docs/tutorial-ja-JP.html  /tutorial/tutorial.html  302
 /docs/tutorial-ko-KR.html  /tutorial/tutorial.html  302
 /docs/tutorial-zh-CN.html  /tutorial/tutorial.html  302
-/docs/conferences.html  /community/conferences.html  302
-/support.html  /community/support.html  302
-/docs/videos.html  /community/videos.html  302
 /blog/  /blog/2018/06/07/you-probably-dont-need-derived-state.html  302
