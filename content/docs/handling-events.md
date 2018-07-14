@@ -1,6 +1,6 @@
 ---
 id: handling-events
-title: Handling Events
+title: Обработка событий
 permalink: docs/handling-events.html
 prev: state-and-lifecycle.html
 next: conditional-rendering.html
@@ -8,65 +8,65 @@ redirect_from:
   - "docs/events-ko-KR.html"
 ---
 
-Handling events with React elements is very similar to handling events on DOM elements. There are some syntactic differences:
+Обработка событий React-элементов очень похожа на обработку событий на элементах DOM. Существуют синтаксические различия:
 
-* React events are named using camelCase, rather than lowercase.
-* With JSX you pass a function as the event handler, rather than a string.
+* События React именуются в стиле camelCase, а не в нижнем регистре.
+* С JSX вы передаёте функцию как обработчик события вместо строки.
 
-For example, the HTML:
+Например, HTML:
 
 ```html
 <button onclick="activateLasers()">
-  Activate Lasers
+  Активировать лазеры
 </button>
 ```
 
-is slightly different in React:
+немного отличается по сравнению с React:
 
 ```js{1}
 <button onClick={activateLasers}>
-  Activate Lasers
+  Активировать лазеры
 </button>
 ```
 
-Another difference is that you cannot return `false` to prevent default behavior in React. You must call `preventDefault` explicitly. For example, with plain HTML, to prevent the default link behavior of opening a new page, you can write:
+Другое отличие состоит в том, что вы не можете вернуть `false` для предотвращения поведения по умолчанию в React. Вы должны явно вызывать `preventDefault`. Например, с помощью обычного HTML, чтобы предотвратить поведение ссылки по умолчанию, которое состоит в открытии новой страницы, вы можете написать:
 
 ```html
-<a href="#" onclick="console.log('The link was clicked.'); return false">
-  Click me
+<a href="#" onclick="console.log('Была нажата ссылка.'); return false">
+  Нажми на меня
 </a>
 ```
 
-In React, this could instead be:
+В React это могло бы быть так:
 
 ```js{2-5,8}
 function ActionLink() {
   function handleClick(e) {
     e.preventDefault();
-    console.log('The link was clicked.');
+    console.log('Была нажата ссылка.');
   }
 
   return (
     <a href="#" onClick={handleClick}>
-      Click me
+      Нажми на меня
     </a>
   );
 }
 ```
 
-Here, `e` is a synthetic event. React defines these synthetic events according to the [W3C spec](https://www.w3.org/TR/DOM-Level-3-Events/), so you don't need to worry about cross-browser compatibility. See the [`SyntheticEvent`](/docs/events.html) reference guide to learn more.
+Здесь `e` — синтетическое событие. React определяет эти синтетические события в соответствии со [спецификацией W3C](https://www.w3.org/TR/DOM-Level-3-Events/), поэтому вам не нужно беспокоиться о совместимости между браузерами. Посмотрите справочное руководство [`SyntheticEvent`](/docs/events.html) для получения дополнительной информации.
 
-When using React you should generally not need to call `addEventListener` to add listeners to a DOM element after it is created. Instead, just provide a listener when the element is initially rendered.
+При использовании React вам обычно не нужно вызывать `addEventListener`, чтобы добавить обработчиков событий в элемент DOM после его создания. Вместо этого просто предоставьте обработчик, когда элемент изначально отрисовывается.
 
-When you define a component using an [ES6 class](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes), a common pattern is for an event handler to be a method on the class. For example, this `Toggle` component renders a button that lets the user toggle between "ON" and "OFF" states:
+Когда вы определяете компонент, используя [класс ES6](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Classes), распространённой практикой является объявлять обработчик события как метод класса. Например, данный компонент `Toggle` отображает кнопку, которая позволяет пользователю переключаться между состояниями «ON» и «OFF»:
 
 ```js{6,7,10-14,18}
 class Toggle extends React.Component {
   constructor(props) {
     super(props);
     this.state = {isToggleOn: true};
-
-    // This binding is necessary to make `this` work in the callback
+    
+    // Это привязывание необходимо, чтобы работал объект `this` в колбэке    
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -91,64 +91,64 @@ ReactDOM.render(
 );
 ```
 
-[**Try it on CodePen**](http://codepen.io/gaearon/pen/xEmzGg?editors=0010)
+[**Попробовать на CodePen**](http://codepen.io/gaearon/pen/xEmzGg?editors=0010)
 
-You have to be careful about the meaning of `this` in JSX callbacks. In JavaScript, class methods are not [bound](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind) by default. If you forget to bind `this.handleClick` and pass it to `onClick`, `this` will be `undefined` when the function is actually called.
+Нужно быть аккуратным со значением `this` в колбэках JSX. В JavaScript методы класса не [привязаны](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_objects/Function/bind) по умолчанию. Если вы забудете привязать `this.handleClick` и передать его в атрибут `onClick`, `this` будет` undefined` при фактическом вызове функции.
 
-This is not React-specific behavior; it is a part of [how functions work in JavaScript](https://www.smashingmagazine.com/2014/01/understanding-javascript-function-prototype-bind/). Generally, if you refer to a method without `()` after it, such as `onClick={this.handleClick}`, you should bind that method.
+Это не связано с конкретным поведением React; это часть того, [как работают функции в JavaScript](https://www.smashingmagazine.com/2014/01/understanding-javascript-function-prototype-bind/). Как правило, если вы ссылаетесь на метод без `()` после него, например `onClick = {this.handleClick}`, вам нужно привязать этот метод.
 
-If calling `bind` annoys you, there are two ways you can get around this. If you are using the experimental [public class fields syntax](https://babeljs.io/docs/plugins/transform-class-properties/), you can use class fields to correctly bind callbacks:
+Если вызов `bind` раздражает вас, есть два способа обойти это. Если вы используете экспериментальный [синтаксис полей общедоступных классов] (https://babeljs.io/docs/plugins/transform-class-properties/), вы можете использовать поля классов для правильной привязки колбэков:
 
 ```js{2-6}
 class LoggingButton extends React.Component {
-  // This syntax ensures `this` is bound within handleClick.
-  // Warning: this is *experimental* syntax.
+  // Данный синтаксис гарантирует, что `this` привязан внутри handleClick.
+  // Предупреждение: это *экспериментальный* синтаксис.
   handleClick = () => {
-    console.log('this is:', this);
+    console.log('this это:', this);
   }
 
   render() {
     return (
       <button onClick={this.handleClick}>
-        Click me
+        Нажми на меня
       </button>
     );
   }
 }
 ```
 
-This syntax is enabled by default in [Create React App](https://github.com/facebookincubator/create-react-app).
+Этот синтаксис включён по умолчанию в [Create React App](https://github.com/facebookincubator/create-react-app).
 
-If you aren't using class fields syntax, you can use an [arrow function](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions) in the callback:
+Если вы не используете синтаксис полей, то вместо него можно воспользоваться [стрелочной функцией](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Functions/Arrow_functions) в колбэке:
 
 ```js{7-9}
 class LoggingButton extends React.Component {
   handleClick() {
-    console.log('this is:', this);
+    console.log('this это:', this);
   }
 
   render() {
-    // This syntax ensures `this` is bound within handleClick
+    // Данный синтаксис гарантирует, что `this` привязан внутри handleClick.
     return (
       <button onClick={(e) => this.handleClick(e)}>
-        Click me
+        Нажми на меня
       </button>
     );
   }
 }
 ```
 
-The problem with this syntax is that a different callback is created each time the `LoggingButton` renders. In most cases, this is fine. However, if this callback is passed as a prop to lower components, those components might do an extra re-rendering. We generally recommend binding in the constructor or using the class fields syntax, to avoid this sort of performance problem.
+Проблема с этим синтаксисом заключается в том, что при каждой отрисовке `LoggingButton` создаётся новый колбэк. В большинстве случаев это не создае проблем. Однако, если этот колбэк передаётся в качестве свойства нижестоящим компонентам, то эти компоненты могут выполнять дополнительную повторную отрисовку. Как правило, мы рекомендуем привязывать обработчики в конструкторе или использовать синтаксис полей классов, чтобы избежать такого рода проблем с производительностью.
 
-## Passing Arguments to Event Handlers
+## Передача аргментов в обработчики событий
 
-Inside a loop it is common to want to pass an extra parameter to an event handler. For example, if `id` is the row ID, either of the following would work:
+Внутри цикла обычно требуется передать дополнительный параметр обработчику событий. Например, если `id` — это идентификатор строки, рабочим будет один из следующих вариантов:
 
 ```js
-<button onClick={(e) => this.deleteRow(id, e)}>Delete Row</button>
-<button onClick={this.deleteRow.bind(this, id)}>Delete Row</button>
+<button onClick={(e) => this.deleteRow(id, e)}>Удалить строку</button>
+<button onClick={this.deleteRow.bind(this, id)}>Удалить строку</button>
 ```
 
-The above two lines are equivalent, and use [arrow functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) and [`Function.prototype.bind`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_objects/Function/bind) respectively.
+Вышеуказанные две строки эквикаленты и используют [стрелочные функции](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Functions/Arrow_functions) и [`Function.prototype.bind`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_objects/Function/bind) соответственно.
 
-In both cases, the `e` argument representing the React event will be passed as a second argument after the ID. With an arrow function, we have to pass it explicitly, but with `bind` any further arguments are automatically forwarded.
+В обоих случаях аргумент `e`, представляющий событие React, будет передан как второй аргумент после ID. При использовании стрелочной функции нужно передавать её явно, но с помощью `bind` любые дополнительные аргументы передаются в функцию автоматически.
