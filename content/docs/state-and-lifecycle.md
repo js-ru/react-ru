@@ -7,7 +7,7 @@ prev: components-and-props.html
 next: handling-events.html
 ---
 
-На этой странице представлена концепция состояния и жизненного цикла в компоненте React. Здесь вы можете найти [подробную справочник API компонента](/docs/react-component.html).
+На этой странице представлена концепция состояния и жизненного цикла в компоненте React. [Здесь](/docs/react-component.html) вы можете найти подробный справочник API компонента.
 
 Рассмотрим пример тикающих часов из [одного из предыдущих разделов](/docs/rendering-elements.html#updating-the-rendered-element). В разделе [Отрисовка элементов](/docs/rendering-elements.html#rendering-an-element-into-the-dom) мы изучили только один способ обновления пользовательского интерфейса (UI). Мы вызываем `ReactDOM.render()` для изменения отрисованного вывода:
 
