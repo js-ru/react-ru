@@ -35,7 +35,7 @@ function Comment(props) {
 
 const comment = {
   date: new Date(),
-  text: 'I hope you enjoy learning React!',
+  text: 'Надеюсь, вам понравится изучение React!',
   author: {
     name: 'Hello Kitty',
     avatarUrl: 'http://placekitten.com/g/64/64',
