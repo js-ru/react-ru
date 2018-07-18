@@ -6,13 +6,13 @@ layout: docs
 category: Reference
 ---
 
-This reference guide documents the `SyntheticEvent` wrapper that forms part of React's Event System. See the [Handling Events](/docs/handling-events.html) guide to learn more.
+Это справочное руководство документирует обёртку `SyntheticEvent`, часть системы событий React. Смотрите руководство по [обработке событий](/docs/handling-events.html), чтобы узнать больше.
 
-## Overview
+## Обзор
 
-Your event handlers will be passed instances of `SyntheticEvent`, a cross-browser wrapper around the browser's native event. It has the same interface as the browser's native event, including `stopPropagation()` and `preventDefault()`, except the events work identically across all browsers.
+Вашим обработчикам событий будут переданы экземпляры `SyntheticEvent`, кроссбраузерная оболочка вокруг нативного события браузера. Она имеет тот же интерфейс, что и нативное событие браузера, включая `stopPropagation()` и `preventDefault()`, за исключением того, что события работают одинаково во всех браузерах.
 
-If you find that you need the underlying browser event for some reason, simply use the `nativeEvent` attribute to get it. Every `SyntheticEvent` object has the following attributes:
+Если по какой-то причине вам нужно исходное событие браузера, просто используйте атрибут `nativeEvent` для его получения. У каждого объекта `SyntheticEvent` есть следующие атрибуты:
 
 ```javascript
 boolean bubbles
@@ -31,19 +31,19 @@ number timeStamp
 string type
 ```
 
-> Note:
+> Примечание:
 >
-> As of v0.14, returning `false` from an event handler will no longer stop event propagation. Instead, `e.stopPropagation()` or `e.preventDefault()` should be triggered manually, as appropriate.
+> Начиная с версии 0.14, возврат `false` из обработчика события больше не будет останавливать всплытие события. Вместо этого `e.stopPropagation ()` или `e.preventDefault ()` следует запускать вручную, если это необходимо.
 
-### Event Pooling
+### Объединение событий в пул
 
-The `SyntheticEvent` is pooled. This means that the `SyntheticEvent` object will be reused and all properties will be nullified after the event callback has been invoked.
-This is for performance reasons.
-As such, you cannot access the event in an asynchronous way.
+`SyntheticEvent` помещается в пул. Это означает, что объект `SyntheticEvent` будет повторно использован, и все свойства будут иметь значение `null` после того, как колбэк будет вызван.
+Это сделано по соображениям производительности.
+Таким образом, вы не можете получить доступ к событию асинхронным способом.
 
 ```javascript
 function onClick(event) {
-  console.log(event); // => nullified object.
+  console.log(event); // => обнуляемый объект.
   console.log(event.type); // => "click"
   const eventType = event.type; // => "click"
 
@@ -52,23 +52,23 @@ function onClick(event) {
     console.log(eventType); // => "click"
   }, 0);
 
-  // Won't work. this.state.clickEvent will only contain null values.
+  // Не будет работать. this.state.clickEvent будет содержать только значения null.
   this.setState({clickEvent: event});
 
-  // You can still export event properties.
+  // Вы всё равно можете экспортировать свойства события.
   this.setState({eventType: event.type});
 }
 ```
 
-> Note:
+> Примечание:
 >
-> If you want to access the event properties in an asynchronous way, you should call `event.persist()` on the event, which will remove the synthetic event from the pool and allow references to the event to be retained by user code.
+> Если вы хотите получить доступ к свойствам событий асинхронным способом, вам следует вызвать `event.persist()` на событии, что удалит синтетическое событие из пула и позволит ссылаться на событие, которое будет сохранено кодом пользователя.
 
-## Supported Events
+## Поддерживаемые события
 
-React normalizes events so that they have consistent properties across different browsers.
+React нормализует события для того, чтобы они имели одинаковые свойства в разных браузерах.
 
-The event handlers below are triggered by an event in the bubbling phase. To register an event handler for the capture phase, append `Capture` to the event name; for example, instead of using `onClick`, you would use `onClickCapture` to handle the click event in the capture phase.
+Обработчики событий, перечисленные ниже, вызываются событием в стадии всплытия. Чтобы зарегистрировать обработчик событий для стадии перехвата, добавьте `Capture` в имя события; например, вместо использования `onClick`, вам следует использовать `onClickCapture` для обработки события `click` в фазе перехвата.
 
 - [Clipboard Events](#clipboard-events)
 - [Composition Events](#composition-events)
@@ -89,17 +89,17 @@ The event handlers below are triggered by an event in the bubbling phase. To reg
 
 * * *
 
-## Reference
+## Справочник
 
-### Clipboard Events
+### События буфера обмена
 
-Event names:
+Имена событий:
 
 ```
 onCopy onCut onPaste
 ```
 
-Properties:
+Свойства:
 
 ```javascript
 DOMDataTransfer clipboardData
@@ -107,15 +107,15 @@ DOMDataTransfer clipboardData
 
 * * *
 
-### Composition Events
+### События композиции
 
-Event names:
+Имена событий:
 
 ```
 onCompositionEnd onCompositionStart onCompositionUpdate
 ```
 
-Properties:
+Свойства:
 
 ```javascript
 string data
@@ -124,15 +124,15 @@ string data
 
 * * *
 
-### Keyboard Events
+### События клавиатуры
 
-Event names:
+Имена событий:
 
 ```
 onKeyDown onKeyPress onKeyUp
 ```
 
-Properties:
+Свойства:
 
 ```javascript
 boolean altKey
@@ -149,21 +149,21 @@ boolean shiftKey
 number which
 ```
 
-The `key` property can take any of the values documented in the [DOM Level 3 Events spec](https://www.w3.org/TR/uievents-key/#named-key-attribute-values).
+Свойство `key` может принимать любые значения, задокументированные в [спецификации событий DOM третьего уровня](https://www.w3.org/TR/uievents-key/#named-key-attribute-values).
 
 * * *
 
-### Focus Events
+### События фокуса
 
-Event names:
+Имена событий:
 
 ```
 onFocus onBlur
 ```
 
-These focus events work on all elements in the React DOM, not just form elements.
+Эти события фокуса работают на всех элементах DOM React, а не только на элементах формы.
 
-Properties:
+Свойства:
 
 ```javascript
 DOMEventTarget relatedTarget
@@ -171,21 +171,21 @@ DOMEventTarget relatedTarget
 
 * * *
 
-### Form Events
+### События формы
 
-Event names:
+Имена событий:
 
 ```
 onChange onInput onInvalid onSubmit
 ```
 
-For more information about the onChange event, see [Forms](/docs/forms.html).
+Дополнительную информацию о событии `onChange` можно получить в разделе [Формы](/docs/forms.html).
 
 * * *
 
-### Mouse Events
+### События мыши
 
-Event names:
+Имена событий:
 
 ```
 onClick onContextMenu onDoubleClick onDrag onDragEnd onDragEnter onDragExit
@@ -193,9 +193,9 @@ onDragLeave onDragOver onDragStart onDrop onMouseDown onMouseEnter onMouseLeave
 onMouseMove onMouseOut onMouseOver onMouseUp
 ```
 
-The `onMouseEnter` and `onMouseLeave` events propagate from the element being left to the one being entered instead of ordinary bubbling and do not have a capture phase.
+События `onMouseEnter` и` onMouseLeave` распространяются от элемента, с которого мышь ушла к элементу над которым она появилась, вместо обычного всплытия и не имеют фазы перехвата.
 
-Properties:
+Свойства:
 
 ```javascript
 boolean altKey
@@ -216,20 +216,20 @@ boolean shiftKey
 
 * * *
 
-### Pointer Events
+### События указателя
 
-Event names:
+Имена событий:
 
 ```
 onPointerDown onPointerMove onPointerUp onPointerCancel onGotPointerCapture
 onLostPointerCapture onPointerEnter onPointerLeave onPointerOver onPointerOut
 ```
 
-The `onPointerEnter` and `onPointerLeave` events propagate from the element being left to the one being entered instead of ordinary bubbling and do not have a capture phase.
+События `onPointerEnter` и` onPointerLeave` распространяются с элемента, от которого ушла мышь до элемента, над которым она находится теперь, вместо обычного всплытия и не имеют фазы перехвата.
 
-Properties:
+Свойства:
 
-As defined in the [W3 spec](https://www.w3.org/TR/pointerevents/), pointer events extend [Mouse Events](#mouse-events) with the following properties:
+Как определено в [спецификации W3](https://www.w3.org/TR/pointerevents/), события указателя расширяют [события мыши](#mouse-events) со следующими свойствами:
 
 ```javascript
 number pointerId
@@ -242,17 +242,17 @@ string pointerType
 boolean isPrimary
 ```
 
-A note on cross-browser support:
+Заметка про поддержку кроссбраузерности:
 
-Pointer events are not yet supported in every browser (at the time of writing this article, supported browsers include: Chrome, Firefox, Edge, and Internet Explorer). React deliberately does not polyfill support for other browsers because a standard-conform polyfill would significantly increase the bundle size of `react-dom`.
+События указателей пока не поддерживаются в каждом браузере (во время написания этой статьи к поддерживаемым браузерам относятся: Chrome, Firefox, Edge и Internet Explorer). React преднамеренно не поддерживает полифилы для других браузеров, потому что отвечающий стандартам полифил значительно увеличивает размер пакета `react-dom`.
 
-If your application requires pointer events, we recommend adding a third party pointer event polyfill.
+Если вашему приложению требуются события указателя, мы рекомендуем добавить сторонний полифил для событий указателей.
 
 * * *
 
-### Selection Events
+### События выделения
 
-Event names:
+Имена событий:
 
 ```
 onSelect
@@ -260,15 +260,15 @@ onSelect
 
 * * *
 
-### Touch Events
+### События прикосновения
 
-Event names:
+Имена событий:
 
 ```
 onTouchCancel onTouchEnd onTouchMove onTouchStart
 ```
 
-Properties:
+Свойства:
 
 ```javascript
 boolean altKey
@@ -283,15 +283,15 @@ DOMTouchList touches
 
 * * *
 
-### UI Events
+### События пользовательского интерфейса (UI)
 
-Event names:
+Имена событий:
 
 ```
 onScroll
 ```
 
-Properties:
+Свойства:
 
 ```javascript
 number detail
@@ -300,15 +300,15 @@ DOMAbstractView view
 
 * * *
 
-### Wheel Events
+### События колеса мыши
 
-Event names:
+Имена событий:
 
 ```
 onWheel
 ```
 
-Properties:
+Свойства:
 
 ```javascript
 number deltaMode
@@ -319,9 +319,9 @@ number deltaZ
 
 * * *
 
-### Media Events
+### События медиаресурсов
 
-Event names:
+Имена событий:
 
 ```
 onAbort onCanPlay onCanPlayThrough onDurationChange onEmptied onEncrypted
@@ -332,9 +332,9 @@ onTimeUpdate onVolumeChange onWaiting
 
 * * *
 
-### Image Events
+### События изображений
 
-Event names:
+Имена событий:
 
 ```
 onLoad onError
@@ -342,15 +342,15 @@ onLoad onError
 
 * * *
 
-### Animation Events
+### События анимаций
 
-Event names:
+Имена событий:
 
 ```
 onAnimationStart onAnimationEnd onAnimationIteration
 ```
 
-Properties:
+Свойства:
 
 ```javascript
 string animationName
@@ -360,15 +360,15 @@ float elapsedTime
 
 * * *
 
-### Transition Events
+### События CSS-свойства transition
 
-Event names:
+Имена событий:
 
 ```
 onTransitionEnd
 ```
 
-Properties:
+Свойства:
 
 ```javascript
 string propertyName
@@ -378,9 +378,9 @@ float elapsedTime
 
 * * *
 
-### Other Events
+### Другие события
 
-Event names:
+Имена событий:
 
 ```
 onToggle
