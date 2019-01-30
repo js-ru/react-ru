@@ -104,7 +104,7 @@ This design is fundamentally flawed, but it's also an easy mistake to make. ([I'
 
 ### Recommendation: Fully controlled component
 
-One way to avoid the problems mentioned above is to remove state from our component entirely. If the email address only exists as a prop, then we don't have to worry about conflicts with state. We could even convert `EmailInput` to a lighter-weight functional component:
+One way to avoid the problems mentioned above is to remove state from our component entirely. If the email address only exists as a prop, then we don't have to worry about conflicts with state. We could even convert `EmailInput` to a lighter-weight function component:
 ```js
 function EmailInput(props) {
   return <input onChange={props.onChange} value={props.email} />;
@@ -337,7 +337,7 @@ This is much simpler and performs just as well as the derived state version!
 When using memoization, remember a couple of constraints:
 
 1. In most cases, you'll want to **attach the memoized function to a component instance**. This prevents multiple instances of a component from resetting each other's memoized keys.
-1. Typically you'll want to use a memoization helper with a **limited cache size** in order to prevent memory leaks over time. (In the example above, we used `memoize-one` because it only caches the most recent argument and result.)
+1. Typically you'll want to use a memoization helper with a **limited cache size** in order to prevent memory leaks over time. (In the example above, we used `memoize-one` because it only caches the most recent arguments and result.)
 1. None of the implementations shown in this section will work if `props.list` is recreated each time the parent component renders. But in most cases, this setup is appropriate.
 
 ## In closing

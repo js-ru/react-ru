@@ -5,7 +5,8 @@ layout: contributing
 permalink: docs/codebase-overview.html
 prev: how-to-contribute.html
 next: implementation-notes.html
-redirect_from: "contributing/codebase-overview.html"
+redirect_from:
+  - "contributing/codebase-overview.html"
 ---
 
 This section will give you an overview of the React codebase organization, its conventions, and the implementation.
@@ -210,7 +211,7 @@ Its main goals are:
 * Ability to return multiple elements from `render()`.
 * Better support for error boundaries.
 
-You can read more about it in [React Fiber Architecture](https://github.com/acdlite/react-fiber-architecture). While it has shipped with React 16, the async features are not enabled by default yet.
+You can read more about React Fiber Architecture [here](https://github.com/acdlite/react-fiber-architecture) and [here](https://blog.ag-grid.com/index.php/2018/11/29/inside-fiber-in-depth-overview-of-the-new-reconciliation-algorithm-in-react). While it has shipped with React 16, the async features are not enabled by default yet.
 
 Its source code is located in [`packages/react-reconciler`](https://github.com/facebook/react/tree/master/packages/react-reconciler).
 

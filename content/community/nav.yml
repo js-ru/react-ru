@@ -2,20 +2,20 @@
   items:
     - id: support
       title: Поддержка
-    - id: conferences
-      title: Конференции
-    - id: meetups
-      title: Митапы
-    - id: articles
-      title: Articles
-    - id: podcasts
-      title: Подкасты
-    - id: videos
-      title: Видео
     - id: courses
       title: Курсы
     - id: examples
       title: Примеры
+    - id: meetups
+      title: Митапы
+    - id: conferences
+      title: Конференции
+    - id: articles
+      title: Статьи
+    - id: podcasts
+      title: Подкасты
+    - id: videos
+      title: Видео
     - id: external-resources
       title: Внешние ресурсы
 - title: Инструменты

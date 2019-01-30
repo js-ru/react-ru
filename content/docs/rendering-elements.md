@@ -2,7 +2,8 @@
 id: rendering-elements
 title: Отрисовка элементов
 permalink: docs/rendering-elements.html
-redirect_from: "docs/displaying-data.html"
+redirect_from:
+  - "docs/displaying-data.html"
 prev: introducing-jsx.html
 next: components-and-props.html
 ---

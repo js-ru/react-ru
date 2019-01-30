@@ -77,15 +77,25 @@ This setup requires more work but allows you to complete the tutorial using an e
 2. Follow the [installation instructions for Create React App](/docs/create-a-new-react-app.html#create-react-app) to make a new project.
 
 ```bash
-npm install -g create-react-app
-create-react-app my-app
+npx create-react-app my-app
 ```
 
-3. Delete all files in the `src/` folder of the new project (don't delete the folder, just its contents).
+3. Delete all files in the `src/` folder of the new project 
+
+> Note: **don't delete the entire `src` folder, just the original source files inside it.**.  We'll replace the default source files with examples for this project in the next step.
 
 ```bash
 cd my-app
-rm -f src/*
+cd src
+
+# If you're using a Mac or Linux:
+rm -f *
+
+# Or, if you're on Windows:
+del *
+
+# Then, switch back to the project folder
+cd ..
 ```
 
 4. Add a file named `index.css` in the `src/` folder with [this CSS code](https://codepen.io/gaearon/pen/oWWQNa?editors=0100).
@@ -102,13 +112,13 @@ import './index.css';
 
 Now if you run `npm start` in the project folder and open `http://localhost:3000` in the browser, you should see an empty tic-tac-toe field.
 
-We recommend following [these instructions](http://babeljs.io/docs/editors) to configure syntax highlighting for your editor.
+We recommend following [these instructions](https://babeljs.io/docs/editors/) to configure syntax highlighting for your editor.
 
 </details>
 
 ### Help, I'm Stuck!
 
-If you get stuck, check out the [community support resources](/community/support.html). In particular, [Reactiflux Chat](/community/support.html#reactiflux-chat) is a great way to get help quickly. If you don't receive an answer, or if you remain stuck, please file an issue, and we'll help you out.
+If you get stuck, check out the [community support resources](/community/support.html). In particular, [Reactiflux Chat](https://discord.gg/0ZcbPKXt5bZjGY5n) is a great way to get help quickly. If you don't receive an answer, or if you remain stuck, please file an issue, and we'll help you out.
 
 ## Overview
 
@@ -164,7 +174,7 @@ The `ShoppingList` component above only renders built-in DOM components like `<d
 
 If you're going to work on the tutorial **in your browser,** open this code in a new tab: **[Starter Code](https://codepen.io/gaearon/pen/oWWQNa?editors=0010)**. If you're going to work on the tutorial **locally,** instead open `src/index.js` in your project folder (you have already touched this file during the [setup](#setup-option-2-local-development-environment)).
 
-This Starter Code is the base of what we're building. We've provided the CSS styling so that you only need focus on learning React and programming the tic-tac-toe game.
+This Starter Code is the base of what we're building. We've provided the CSS styling so that you only need to focus on learning React and programming the tic-tac-toe game.
 
 By inspecting the code, you'll notice that we have three React components:
 
@@ -575,11 +585,11 @@ The main benefit of immutability is that it helps you build _pure components_ in
 
 You can learn more about `shouldComponentUpdate()` and how you can build *pure components* by reading [Optimizing Performance](/docs/optimizing-performance.html#examples).
 
-### Functional Components
+### Function Components
 
-We'll now change the Square to be a **functional component**.
+We'll now change the Square to be a **function component**.
 
-In React, **functional components** are a simpler way to write components that only contain a `render` method and don't have their own state. Instead of defining a class which extends `React.Component`, we can write a function that takes `props` as input and returns what should be rendered. Functional components are less tedious to write than classes, and many components can be expressed this way.
+In React, **function components** are a simpler way to write components that only contain a `render` method and don't have their own state. Instead of defining a class which extends `React.Component`, we can write a function that takes `props` as input and returns what should be rendered. Function components are less tedious to write than classes, and many components can be expressed this way.
 
 Replace the Square class with this function:
 
@@ -599,13 +609,13 @@ We have changed `this.props` to `props` both times it appears.
 
 >Note
 >
->When we modified the Square to be a functional component, we also changed `onClick={() => this.props.onClick()}` to a shorter `onClick={props.onClick}` (note the lack of parentheses on *both* sides). In a class, we used an arrow function to access the correct `this` value, but in a functional component we don't need to worry about `this`.
+>When we modified the Square to be a function component, we also changed `onClick={() => this.props.onClick()}` to a shorter `onClick={props.onClick}` (note the lack of parentheses on *both* sides). In a class, we used an arrow function to access the correct `this` value, but in a function component we don't need to worry about `this`.
 
 ### Taking Turns
 
 We now need to fix an obvious defect in our tic-tac-toe game: the "O"s cannot be marked on the board.
 
-We'll set the the first move to be "X" by default. We can set this default by modifying the initial state in our Board constructor:
+We'll set the first move to be "X" by default. We can set this default by modifying the initial state in our Board constructor:
 
 ```javascript{6}
 class Board extends React.Component {
@@ -810,7 +820,7 @@ Now we need to decide which component should own the `history` state.
 
 We'll want the top-level Game component to display a list of past moves. It will need access to the `history` to do that, so we will place the `history` state in the top-level Game component.
 
-Placing the `history` state into the Game component lets us remove the `squares` state from its child Board component. Just like we ["lifted state up"](#lifting-state-up) from the Square component into the Board component, we are now lifting it up from the Board into the top-level Game component. This gives the Game component full control over what the Board's data, and lets it instruct the Board to render past turns from the `history`.
+Placing the `history` state into the Game component lets us remove the `squares` state from its child Board component. Just like we ["lifted state up"](#lifting-state-up) from the Square component into the Board component, we are now lifting it up from the Board into the top-level Game component. This gives the Game component full control over the Board's data, and lets it instruct the Board to render previous turns from the `history`.
 
 First, we'll set up the initial state for the Game component within its constructor:
 
@@ -1052,7 +1062,7 @@ Let's `map` over the `history` in the Game's `render` method:
 
 **[View the full code at this point](https://codepen.io/gaearon/pen/EmmGEa?editors=0010)**
 
-For each move in the tic-tac-toes's game's history, we create a list item `<li>` which contains a button `<button>`. The button has a `onClick` handler which calls a method called `this.jumpTo()`. We haven't implemented the `jumpTo()` method yet. For now, we should see a list of the moves that have occurred in the game and a warning that says:
+For each move in the tic-tac-toes's game's history, we create a list item `<li>` which contains a button `<button>`. The button has a `onClick` handler which calls a method called `this.jumpTo()`. We haven't implemented the `jumpTo()` method yet. For now, we should see a list of the moves that have occurred in the game and a warning in the developer tools console that says:
 
 >  Warning:
 >  Each child in an array or iterator should have a unique "key" prop. Check the render method of "Game".
@@ -1078,21 +1088,21 @@ to
 <li>Alexa: 5 tasks left</li>
 ```
 
-From our perspective, our transition swapped Alexa and Ben's ordering and inserted Claudia between Alexa and Ben. However, React is a computer program and does not know what we intended. Because React cannot know our intentions, we need to specify a *key* property for each list item to differentiate each list item from its siblings. The strings `alexa`, `ben`, `claudia` may be used as keys. If we had access to a database, Alexa, Ben, and Claudia's database IDs could be used as keys.
+In addition to the updated counts, a human reading this would probably say that we swapped Alexa and Ben's ordering and inserted Claudia between Alexa and Ben. However, React is a computer program and does not know what we intended. Because React cannot know our intentions, we need to specify a *key* property for each list item to differentiate each list item from its siblings. One option would be to use the strings `alexa`, `ben`, `claudia`. If we were displaying data from a database, Alexa, Ben, and Claudia's database IDs could be used as keys.
 
 ```html
 <li key={user.id}>{user.name}: {user.taskCount} tasks left</li>
 ```
 
-`key` is a special and reserved property in React (along with `ref`, a more advanced feature). When an element is created, React extracts the `key` property and stores the key directly on the returned element. Even though `key` may look like it belongs in `props`, `key` cannot be referenced using `this.props.key`. React automatically uses `key` to decide which components to update. A component cannot inquire about its `key`.
+When a list is re-rendered, React takes each list item's key and searches the previous list's items for a matching key. If the current list has a key that didn't exist before, React creates a component. If the current list is missing a key that existed in the previous list, React destroys the previous component. If two keys match, the corresponding component is moved. Keys tell React about the identity of each component which allows React to maintain state between re-renders. If a component's key changes, the component will be destroyed and re-created with a new state.
 
-When a list is re-rendered, React takes each list item's key and searches the previous list's items for a matching key. If the current list has a key that does not exist in the previous list, React creates a component. If the current list is missing a key that exists in the previous list, React destroys a component. Keys tell React about the identity of each component which allows React to maintain state between re-renders. If a component's key changes, the component will be destroyed and re-created with a new state.
+`key` is a special and reserved property in React (along with `ref`, a more advanced feature). When an element is created, React extracts the `key` property and stores the key directly on the returned element. Even though `key` may look like it belongs in `props`, `key` cannot be referenced using `this.props.key`. React automatically uses `key` to decide which components to update. A component cannot inquire about its `key`.
 
 **It's strongly recommended that you assign proper keys whenever you build dynamic lists.** If you don't have an appropriate key, you may want to consider restructuring your data so that you do.
 
 If no key is specified, React will present a warning and use the array index as a key by default. Using the array index as a key is problematic when trying to re-order a list's items or inserting/removing list items. Explicitly passing `key={i}` silences the warning but has the same problems as array indices and is not recommended in most cases.
 
-Keys do not need to be globally unique. Keys only needs to be unique between components and their siblings.
+Keys do not need to be globally unique; they only need to be unique between components and their siblings.
 
 
 ### Implementing Time Travel

@@ -4,7 +4,8 @@ title: Отрисовка по условию
 permalink: docs/conditional-rendering.html
 prev: handling-events.html
 next: lists-and-keys.html
-redirect_from: "tips/false-in-jsx.html"
+redirect_from:
+  - "tips/false-in-jsx.html"
 ---
 
 В React вы можете создавать отдельные компоненты, которые инкапсулируют нужное вам поведение. Затем вы можете отрисовать только некоторые из них, в зависимости от состояния вашего приложения.
@@ -97,7 +98,7 @@ class LoginControl extends React.Component {
     if (isLoggedIn) {
       button = <LogoutButton onClick={this.handleLogoutClick} />;
     } else {
-      button = <LoginButton onClick={this.handleLoginClick} />
+      button = <LoginButton onClick={this.handleLoginClick} />;
     }
 
     return (
@@ -216,8 +217,8 @@ class Page extends React.Component {
   }
 
   handleToggleClick() {
-    this.setState(prevState => ({
-      showWarning: !prevState.showWarning
+    this.setState(state => ({
+      showWarning: !state.showWarning
     }));
   }
 

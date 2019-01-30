@@ -2,7 +2,8 @@
 id: composition-vs-inheritance
 title: Композиция в сравнении с наследованием
 permalink: docs/composition-vs-inheritance.html
-redirect_from: "docs/multiple-components.html"
+redirect_from:
+  - "docs/multiple-components.html"
 prev: lifting-state-up.html
 next: thinking-in-react.html
 ---

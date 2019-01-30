@@ -83,6 +83,7 @@ class Welcome extends React.Component {
 
 Этот метод вызывается при возникновении ошибки во время отрисовки, в методе жизненного цикла или в конструкторе любого дочернего компонента.
 
+- [`static getDerivedStateFromError()`](#static-getderivedstatefromerror)
 - [`componentDidCatch()`](#componentdidcatch)
 
 ### Другие API
@@ -289,6 +290,8 @@ static getDerivedStateFromProps(props, state)
 
 Обратите внимание, что этот метод запускается при *каждой* отрисовке, независимо от причины. Это противоречит `UNSAFE_componentWillReceiveProps`, который запускается только тогда, когда родительский компонент вызывает повторную отрисовку, а не как результат локального `setState`.
 
+* * *
+
 ### `getSnapshotBeforeUpdate()`
 
 ```javascript
@@ -309,12 +312,6 @@ getSnapshotBeforeUpdate(prevProps, prevState)
 
 * * *
 
-### `componentDidCatch()`
-
-```javascript
-componentDidCatch(error, info)
-```
-
 [Граница ошибок](/docs/error-boundaries.html) — это React-компоненты, которые перехватывают ошибки JavaScript в любом месте их дочернего дерева компонентов, логируют эти ошибки и отображают резервный интерфейс вместо разрушенного дерева компонентов. Граница ошибок отлавливают ошибки при отрисовке, в методах жизненного цикла и в конструкторах всего дерева под ними.
 
 Классовый компонент становится границей ошибки, если он определяет этот метод жизненного цикла. Вызов `setState()` в нём позволяет зафиксировать необработанную JavaScript-ошибку в приведённом ниже дереве и отобразить резервный интерфейс. Используйте только граница ошибок для восстановления от неожиданных исключений; не пытайтесь использовать их для управления потоком.
@@ -324,6 +321,52 @@ componentDidCatch(error, info)
 > Примечание
 >
 > Граница ошибок перехватывают только ошибки в компонентах **ниже** в их дереве. Граница ошибки не может поймать ошибку внутри себя.
+
+* * *
+
+### `static getDerivedStateFromError()`
+```javascript
+static getDerivedStateFromError(error)
+```
+
+This lifecycle is invoked after an error has been thrown by a descendant component.
+It receives the error that was thrown as a parameter and should return a value to update state.
+
+```js{7-10,13-16}
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    // Update state so the next render will show the fallback UI.
+    return { hasError: true };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      // You can render any custom fallback UI
+      return <h1>Something went wrong.</h1>;
+    }
+
+    return this.props.children; 
+  }
+}
+```
+
+> Note
+>
+> `getDerivedStateFromError()` is called during the "render" phase, so side-effects are not permitted.
+For those use cases, use `componentDidCatch()` instead.
+
+* * *
+
+### `componentDidCatch()`
+
+```javascript
+componentDidCatch(error, info)
+```
 
 * * *
 
@@ -337,15 +380,15 @@ The lifecycle methods below are marked as "legacy". They still work, but we don'
 UNSAFE_componentWillMount()
 ```
 
+> Примечание
+>
+> Этот метод жизненного цикла ранее назывался `componentWillMount`. Он будет продолжать работать до версии 17. Используйте скрипт codemod [`rename-unsafe-lifecycles`](https://github.com/reactjs/react-codemod#rename-unsafe-lifecycles) для автоматического обновления ваших компонентов.
+
 `UNSAFE_componentWillMount()` вызывается непосредственно перед монтированием. Он вызывается перед `render()`, поэтому синхронный вызов `setState()` в этом методе не вызовет дополнительную отрисовку. Как правило, мы рекомендуем использовать `constructor()` вместо этого для инициализации состояния.
 
 Избегайте добавления каких-либо побочных эффектов или подписок в этом методе. Для подобных случаев используйте вместо этого `componentDidMount()`.
 
 Это единственный хук жизненного цикла, вызываемый серверной отрисовкой.
-
-> Примечание
->
-> Этот метод жизненного цикла ранее назывался `componentWillMount`. Он будет продолжать работать до версии 17. Используйте скрипт codemod [`rename-unsafe-lifecycles`](https://github.com/reactjs/react-codemod#rename-unsafe-lifecycles) для автоматического обновления ваших компонентов.
 
 * * *
 
@@ -357,27 +400,24 @@ UNSAFE_componentWillReceiveProps(nextProps)
 
 > Примечание:
 >
-> Использование этого метода жизненного цикла часто приводит к ошибкам и несоответствиям, и по этой причине он будет объявлен устаревшим в будущем.
+> Этот метод жизненного цикла ранее назывался `componentWillReceiveProps`. Он будет продолжать работать до версии 17. Используйте скрипт codemon [`rename-unsafe-lifecycles`](https://github.com/reactjs/react-codemod#rename-unsafe-lifecycles) для автоматического обновления ваших компонентов.
+
+> Примечание:
+>
+> Использование этого метода жизненного цикла часто приводит к ошибкам и несоответствиям.
 >
 > Если вам нужно **выполнить побочный эффект** (например, выборку данных или анимацию) в ответ на изменение свойства, вместо этого используйте жизненный цикл [`componentDidUpdate`](#componentdidupdate).
->
 > Для других случаев использования [следуйте рекомендациям в этом посте блога о производном состоянии](/blog/2018/06/07/you-probably-dont-need-derived-state.html).
->
 > Если вы использовали `componentWillReceiveProps` для **повторного вычисления некоторых данных только при изменении свойства**, [вместо этого используйте помощник memoization](/blog/2018/06/07/you-probably-dont-need-derived-state.html#what-about-memoization).
->
 > Если вы использовали `componentWillReceiveProps` для **«сброса» некоторого состояния при изменении свойства**, рассмотрите возможность либо создания [полностью контролируемого компонента](/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-controlled-component) или [полностью неконтролируемого компонента с `key`](/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key).
 >
-> В очень редких случаях и в крайнем случае используйте метод жизненного цикла [`getDerivedStateFromProps`](#static-getderivedstatefromprops).
+> В прочих случаях [следуйте рекомендациям в посте блога о производном состоянии](/blog/2018/06/07/you-probably-dont-need-derived-state.html).
 
 `UNSAFE_componentWillReceiveProps()` вызывается до того, как смонтированный компонент получит новые свойства. Если вам нужно обновить состояние в ответ на изменения свойства (например, для его сброса), вы можете сравнить `this.props` и `nextProps` и выполнить переходы состояния с помощью `this.setState()` в этом методе.
 
 Обратите внимание, что если родительский компонент заставляет ваш компонент повторно отрисовываться, этот метод будет вызываться, даже если свойства не изменились. Убедитесь в том, что сравниваете текущие и следующие значения, если вы только хотите обрабатывать изменения.
 
 React не вызывает `UNSAFE_componentWillReceiveProps()` с начальными значениями свойств во время [монтирования](#mounting). Он вызывает этот метод только в том случае, если некоторые свойства компонента могут обновляться. Вызов `this.setState ()`, как правило, не вызывает `UNSAFE_componentWillReceiveProps()`.
-
-> Примечание
->
-> Этот метод жизненного цикла ранее назывался `componentWillReceiveProps`. Он будет продолжать работать до версии 17. Используйте скрипт codemon [`rename-unsafe-lifecycles`](https://github.com/reactjs/react-codemod#rename-unsafe-lifecycles) для автоматического обновления ваших компонентов.
 
 * * *
 
@@ -387,15 +427,15 @@ React не вызывает `UNSAFE_componentWillReceiveProps()` с началь
 UNSAFE_componentWillUpdate(nextProps, nextState)
 ```
 
+> Примечание
+>
+> Этот метод жизненного цикла ранее назывался `componentWillUpdate`. Он будет продолжать работать до версии 17. Используйте скрипт codemon [`rename-unsafe-lifecycles`](https://github.com/reactjs/react-codemod#rename-unsafe-lifecycles) для автоматического обновления ваших компонентов.
+
 `UNSAFE_componentWillUpdate()` вызывается непосредственно перед отрисовкой при получении новых свойств или состояния. Используйте это как возможность выполнить подготовку до того, как произойдет обновление. Этот метод не вызывается при первоначальной отрисовке.
 
 Обратите внимание: внутри этого метода вы не можете вызвать `this.setState()`; вы также не должны делать что-либо ещё (например, отправлять действие Redux), которое инициирует обновление компонента React перед возвратом `UNSAFE_componentWillUpdate()`.
 
 Как правило, этот метод может быть заменён на `componentDidUpdate()`. Если вы считываете из DOM в этом методе (например, чтобы сохранить положение прокрутки), вы можете переместить эту логику в `getSnapshotBeforeUpdate()`.
-
-> Примечание
->
-> Этот метод жизненного цикла ранее назывался `componentWillUpdate`. Он будет продолжать работать до версии 17. Используйте скрипт codemon [`rename-unsafe-lifecycles`](https://github.com/reactjs/react-codemod#rename-unsafe-lifecycles) для автоматического обновления ваших компонентов.
 
 > Примечание
 >
@@ -426,18 +466,18 @@ setState(updater[, callback])
 Первый аргумент — это функция `updater` со следующим определением:
 
 ```javascript
-(prevState, props) => stateChange
+(state, props) => stateChange
 ```
 
-`prevState` — ссылка на предыдущее состояние. Оно не должно напрямую изменятся. Вместо этого изменения должны быть представлены путём создания нового объекта на основе входных данных из `prevState` и `props`. Например, предположим, что мы хотим увеличить значение в состоянии с помощью `props.step`:
+`state` — ссылка на предыдущее состояние. Оно не должно напрямую изменятся. Вместо этого изменения должны быть представлены путём создания нового объекта на основе входных данных из `prevState` и `props`. Например, предположим, что мы хотим увеличить значение в состоянии с помощью `props.step`:
 
 ```javascript
-this.setState((prevState, props) => {
-  return {counter: prevState.counter + props.step};
+this.setState((state, props) => {
+  return {counter: state.counter + props.step};
 });
 ```
 
-Как `prevState`, так и `props`, полученные функцией обновления в `setState()`, гарантировано будут в актуальном состоянии. Результат функции обновления поверхностно объединяется с `prevState`.
+Как `state`, так и `props`, полученные функцией обновления, гарантировано будут в актуальном состоянии. Результат функции обновления поверхностно объединяется с `state`.
 
 Второй параметр `setState()` — необязательный колбэк, вызываемый после завершения работы `setState` и далее компонент будет повторно отрисован. Обычно вместо этого мы рекомендуем использовать `componentDidUpdate()` для подобной логики.
 
@@ -467,8 +507,8 @@ Object.assign(
 Последующие вызовы будут переопределять значения из предыдущих вызовов в том же самом цикле, поэтому количество будет увеличиваться только один раз. Если следующее состояние зависит от предыдущего состояния, мы рекомендуем использовать форму функции для обновления, т.е. следующим образом:
 
 ```js
-this.setState((prevState) => {
-  return {quantity: prevState.quantity + 1};
+this.setState((state) => {
+  return {quantity: state.quantity + 1};
 });
 ```
 

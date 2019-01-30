@@ -2,7 +2,8 @@
 id: state-and-lifecycle
 title: Состояние и жизненный цикл
 permalink: docs/state-and-lifecycle.html
-redirect_from: "docs/interactivity-and-dynamic-uis.html"
+redirect_from:
+  - "docs/interactivity-and-dynamic-uis.html"
 prev: components-and-props.html
 next: handling-events.html
 ---
@@ -358,8 +359,8 @@ this.setState({
 
 ```js
 // Правильно
-this.setState((prevState, props) => ({
-  counter: prevState.counter + props.increment
+this.setState((state, props) => ({
+  counter: state.counter + props.increment
 }));
 ```
 
@@ -367,9 +368,9 @@ this.setState((prevState, props) => ({
 
 ```js
 // Правильно
-this.setState(function(prevState, props) {
+this.setState(function(state, props) {
   return {
-    counter: prevState.counter + props.increment
+    counter: state.counter + props.increment
   };
 });
 ```
