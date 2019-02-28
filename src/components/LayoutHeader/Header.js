@@ -16,7 +16,7 @@ import DocSearch from './DocSearch';
 
 import logoSvg from 'icons/logo.svg';
 
-const Header = ({location}: {location: Location}) => (
+const Header = ({location}: {location: Location}) => (      
   <header
     css={{
       backgroundColor: colors.darker,
@@ -24,7 +24,7 @@ const Header = ({location}: {location: Location}) => (
       position: 'fixed',
       zIndex: 1,
       width: '100%',
-      top: 0,
+      top: '36px',
       left: 0,
     }}>
     <Container>
