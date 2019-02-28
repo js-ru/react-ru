@@ -54,25 +54,40 @@ class Home extends Component {
           ogUrl={createOgUrl('index.html')}
         />
         <div css={{width: '100%'}}>
-                        <div
-        css={{
-          position: 'fixed',
-          left: 0,
-          right: 0,
-          top: 0,
-          padding: '6px 0',
-          height: '36px',
-          textAlign: 'center',
-          background: '#761a85',
-          color: colors.white,
-          zIndex: 6,
-          lineHeight: '1.4',
-        }}
-      >
-      🎉 Читай <span css={{color: colors.brand, fontWeight: 600}}>официальный</span> перевод документации! ➡️ <a href="https://ru.reactjs.org/" css={{textDecoration: 'underline'}}>ru.reactjs.org</a> 🎉
-      (⭐ ...и не забудь поставить «звёздочку» <a href="https://github.com/reactjs/ru.reactjs.org" target="_blank" css={{textDecoration: 'underline'}}>репозиторию</a>! ⭐)
-      </div>
-      
+          <div
+            css={{
+              position: 'fixed',
+              left: 0,
+              right: 0,
+              top: 0,
+              padding: '6px 0',
+              height: '36px',
+              textAlign: 'center',
+              background: '#761a85',
+              color: colors.white,
+              zIndex: 6,
+              lineHeight: '1.4',
+            }}>
+            🎉 Читай{' '}
+            <span css={{color: colors.brand, fontWeight: 600}}>
+              официальный
+            </span>{' '}
+            перевод документации! ➡️{' '}
+            <a
+              href="https://ru.reactjs.org/"
+              css={{textDecoration: 'underline'}}>
+              ru.reactjs.org
+            </a>{' '}
+            🎉 (⭐ ...и не забудь поставить «звёздочку»{' '}
+            <a
+              href="https://github.com/reactjs/ru.reactjs.org"
+              target="_blank"
+              css={{textDecoration: 'underline'}}>
+              репозиторию
+            </a>
+            ! ⭐)
+          </div>
+
           <header
             css={{
               backgroundColor: colors.dark,
@@ -82,12 +97,10 @@ class Home extends Component {
               css={{
                 paddingTop: 45,
                 paddingBottom: 20,
-
                 [media.greaterThan('small')]: {
                   paddingTop: 60,
                   paddingBottom: 70,
                 },
-
                 [media.greaterThan('xlarge')]: {
                   paddingTop: 95,
                   paddingBottom: 85,
@@ -139,14 +152,12 @@ class Home extends Component {
                       fontSize: 24,
                       letterSpacing: '0.01em',
                       fontWeight: 200,
-
                       [media.size('xsmall')]: {
                         fontSize: 16,
                         maxWidth: '12em',
                         marginLeft: 'auto',
                         marginRight: 'auto',
                       },
-
                       [media.greaterThan('xlarge')]: {
                         paddingTop: 20,
                         fontSize: 30,
@@ -159,7 +170,6 @@ class Home extends Component {
                     valign="center"
                     css={{
                       paddingTop: 40,
-
                       [media.greaterThan('xlarge')]: {
                         paddingTop: 65,
                       },
@@ -204,7 +214,6 @@ class Home extends Component {
                   css={{
                     display: 'flex',
                     flexDirection: 'row',
-
                     [media.lessThan('medium')]: {
                       display: 'block',
                       whiteSpace: 'nowrap',
@@ -218,15 +227,12 @@ class Home extends Component {
                         flexDirection: 'column',
                         flex: '0 1 33%',
                         marginLeft: 40,
-
                         '&:first-of-type': {
                           marginLeft: 0,
-
                           [media.lessThan('medium')]: {
                             marginLeft: 10,
                           },
                         },
-
                         [media.lessThan('medium')]: {
                           display: 'inline-block',
                           verticalAlign: 'top',
@@ -235,7 +241,6 @@ class Home extends Component {
                           width: '75%',
                           marginRight: 20,
                           paddingBottom: 40,
-
                           '&:first-of-type': {
                             marginTop: 0,
                           },
@@ -251,7 +256,6 @@ class Home extends Component {
                               paddingTop: 0,
                               fontWeight: 300,
                               fontSize: 20,
-
                               [media.greaterThan('xlarge')]: {
                                 fontSize: 24,
                               },
@@ -321,32 +325,26 @@ class Home extends Component {
     );
   }
 }
-
 Home.propTypes = {
   data: PropTypes.shape({
     examples: PropTypes.object.isRequired,
     marketing: PropTypes.object.isRequired,
   }).isRequired,
 };
-
 const CtaItem = ({children, primary = false}) => (
   <div
     css={{
       width: '50%',
-
       [media.between('small', 'large')]: {
         paddingLeft: 20,
       },
-
       [media.greaterThan('xlarge')]: {
         paddingLeft: 40,
       },
-
       '&:first-child': {
         textAlign: 'right',
         paddingRight: 15,
       },
-
       '&:nth-child(2)': {
         [media.greaterThan('small')]: {
           paddingLeft: 15,
@@ -356,7 +354,6 @@ const CtaItem = ({children, primary = false}) => (
     {children}
   </div>
 );
-
 export const pageQuery = graphql`
   query IndexMarkdown {
     codeExamples: allExampleCode {
@@ -402,19 +399,15 @@ export const pageQuery = graphql`
     }
   }
 `;
-
 export default Home;
-
 const sectionStyles = {
   marginTop: 20,
   marginBottom: 15,
-
   [media.greaterThan('medium')]: {
     marginTop: 60,
     marginBottom: 65,
   },
 };
-
 const headingStyles = {
   '&&': {
     marginBottom: 20,

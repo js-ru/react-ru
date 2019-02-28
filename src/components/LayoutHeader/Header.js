@@ -16,7 +16,7 @@ import DocSearch from './DocSearch';
 
 import logoSvg from 'icons/logo.svg';
 
-const Header = ({location}: {location: Location}) => (      
+const Header = ({location}: {location: Location}) => (
   <header
     css={{
       backgroundColor: colors.darker,
