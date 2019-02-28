@@ -10,7 +10,7 @@ import Flex from 'components/Flex';
 import CodeExample from 'components/CodeExample';
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
-import {graphql, Link} from 'gatsby';
+import {graphql} from 'gatsby';
 import TitleAndMetaTags from 'components/TitleAndMetaTags';
 import Layout from 'components/Layout';
 import {colors, media, sharedStyles} from 'theme';
@@ -54,40 +54,6 @@ class Home extends Component {
           ogUrl={createOgUrl('index.html')}
         />
         <div css={{width: '100%'}}>
-          <div
-            css={{
-              position: 'fixed',
-              left: 0,
-              right: 0,
-              top: 0,
-              padding: '6px 0',
-              height: '36px',
-              textAlign: 'center',
-              background: '#761a85',
-              color: colors.white,
-              zIndex: 6,
-              lineHeight: '1.4',
-            }}>
-            🎉 Читай{' '}
-            <span css={{color: colors.brand, fontWeight: 600}}>
-              официальный
-            </span>{' '}
-            перевод документации! ➡️{' '}
-            <a
-              href="https://ru.reactjs.org/"
-              css={{textDecoration: 'underline'}}>
-              ru.reactjs.org
-            </a>{' '}
-            🎉 (⭐ ...и не забудь поставить «звёздочку»{' '}
-            <a
-              href="https://github.com/reactjs/ru.reactjs.org"
-              target="_blank"
-              css={{textDecoration: 'underline'}}>
-              репозиторию
-            </a>
-            ! ⭐)
-          </div>
-
           <header
             css={{
               backgroundColor: colors.dark,

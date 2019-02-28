@@ -30,6 +30,36 @@ const Header = ({location}: {location: Location}) => (
     <Container>
       <div
         css={{
+          position: 'fixed',
+          left: 0,
+          right: 0,
+          top: 0,
+          padding: '6px 0',
+          height: '36px',
+          textAlign: 'center',
+          background: '#761a85',
+          color: colors.white,
+          zIndex: 6,
+          lineHeight: '1.4',
+        }}>
+        🎉 Читай{' '}
+        <span css={{color: colors.brand, fontWeight: 600}}>официальный</span>{' '}
+        перевод документации! ➡️{' '}
+        <a href="https://ru.reactjs.org/" css={{textDecoration: 'underline'}}>
+          ru.reactjs.org
+        </a>{' '}
+        🎉 (⭐ ...и не забудь поставить «звёздочку»{' '}
+        <a
+          href="https://github.com/reactjs/ru.reactjs.org"
+          target="_blank"
+          css={{textDecoration: 'underline'}}>
+          репозиторию
+        </a>
+        ! ⭐)
+      </div>
+
+      <div
+        css={{
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',
@@ -48,12 +78,10 @@ const Header = ({location}: {location: Location}) => (
             height: '100%',
             alignItems: 'center',
             color: colors.brand,
-
             ':focus': {
               outline: 0,
               color: colors.white,
             },
-
             [media.greaterThan('small')]: {
               width: 'calc(100% / 6)',
             },
@@ -100,7 +128,6 @@ const Header = ({location}: {location: Location}) => (
             WebkitOverflowScrolling: 'touch',
             height: '100%',
             width: '60%',
-
             [media.size('xsmall')]: {
               flexGrow: '1',
               width: 'auto',
@@ -151,11 +178,9 @@ const Header = ({location}: {location: Location}) => (
               padding: '5px 10px',
               whiteSpace: 'nowrap',
               ...fonts.small,
-
               ':hover': {
                 color: colors.brand,
               },
-
               ':focus': {
                 outline: 0,
                 backgroundColor: colors.lighter,
@@ -171,11 +196,9 @@ const Header = ({location}: {location: Location}) => (
               marginLeft: 10,
               whiteSpace: 'nowrap',
               ...fonts.small,
-
               ':hover': {
                 color: colors.brand,
               },
-
               ':focus': {
                 outline: 0,
                 backgroundColor: colors.lighter,
@@ -199,5 +222,4 @@ const Header = ({location}: {location: Location}) => (
     </Container>
   </header>
 );
-
 export default Header;
