@@ -1,5 +1,9 @@
 # reactjs.org
 
+> **Этот перевод заброшен и больше не будет поддерживаться.**
+>
+> **Вместо этого посетите [репозиторий с официальным переводом](https://github.com/reactjs/ru.reactjs.org) (сайт [ru.reactjs.org](https://ru.reactjs.org/)).**
+
 This repo contains the source code and documentation powering [reactjs.org](https://reactjs.org/).
 
 ## Getting started
