@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[8],{189:function(e,n,t){"use strict";t.r(n),function(e){t.d(n,"pageQuery",function(){return i});var a=t(221),c=(t(0),t(202)),o=t(210),r=t(212),i="128216468";n.default=function(n){var t=n.data,i=n.location;return e.createElement(c.a,{location:i},e.createElement(a.a,{enableScrollSync:!0,createLink:o.d,location:i,markdownRemark:t.markdownRemark,sectionList:r.c,titlePostfix:" – React"}))}}.call(this,t(58))}}]);
+//# sourceMappingURL=component---src-templates-tutorial-js-931f0118372ea90c1d50.js.map
