@@ -4,6 +4,17 @@
 /tutorial /tutorial/tutorial.html
 
 
+## Created with gatsby-transformer-versions-yaml
+
+/version/16.6  https://5c11762d4be4d10008916ab1--reactjs.netlify.com/  302
+/version/16.5  https://5bcf5863c6aed64970d6de5b--reactjs.netlify.com/  302
+/version/16.4  https://5b90c17ac9659241e7f4c938--reactjs.netlify.com  302
+/version/16.3  https://5b05c94e0733d530fd1fafe0--reactjs.netlify.com  302
+/version/16.2  https://5abc31d8be40f1556f06c4be--reactjs.netlify.com  302
+/version/16.1  https://5a1dbcf14c4b93299e65b9a9--reactjs.netlify.com  302
+/version/16.0  https://5a046bf5a6188f4b8fa4938a--reactjs.netlify.com  302
+/version/15.6  https://react-legacy.netlify.com  302
+
 ## Created with gatsby-plugin-netlify
 
 /index.html  /  302
@@ -334,14 +345,3 @@
 /blog/2014/10/14/introducting-react-elements.html  /blog/2014/10/14/introducing-react-elements.html  302
 /blog/  /blog/2018/12/19/react-v-16-7.html  302
 /blog  /blog/2018/12/19/react-v-16-7.html  302
-
-## Created with gatsby-transformer-versions-yaml
-
-/version/16.6  https://5c11762d4be4d10008916ab1--reactjs.netlify.com/  302
-/version/16.5  https://5bcf5863c6aed64970d6de5b--reactjs.netlify.com/  302
-/version/16.4  https://5b90c17ac9659241e7f4c938--reactjs.netlify.com  302
-/version/16.3  https://5b05c94e0733d530fd1fafe0--reactjs.netlify.com  302
-/version/16.2  https://5abc31d8be40f1556f06c4be--reactjs.netlify.com  302
-/version/16.1  https://5a1dbcf14c4b93299e65b9a9--reactjs.netlify.com  302
-/version/16.0  https://5a046bf5a6188f4b8fa4938a--reactjs.netlify.com  302
-/version/15.6  https://react-legacy.netlify.com  302
