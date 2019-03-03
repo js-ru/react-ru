@@ -45,7 +45,7 @@ const Header = ({location}: {location: Location}) => (
         🎉 Читай{' '}
         <span css={{color: colors.brand, fontWeight: 600}}>официальный</span>{' '}
         перевод документации! ➡️{' '}
-        <a href="https://ru.reactjs.org/" css={{textDecoration: 'underline'}}>
+        <a href={`https://ru.reactjs.org${location.pathname}`} css={{textDecoration: 'underline'}}>
           ru.reactjs.org
         </a>{' '}
         🎉 (⭐ ...и не забудь поставить «звёздочку»{' '}
